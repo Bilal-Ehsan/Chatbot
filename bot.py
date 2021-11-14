@@ -9,7 +9,7 @@ api_key = '5403a1e0442ce1dd18cb1bf7c40e776f'
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
 kern.setTextEncoding(None)
-kern.bootstrap(learn_files='bot.xml')
+kern.bootstrap(learnFiles='bot.xml')
 
 print('Welcome to the chatbot! Got a question?')
 
