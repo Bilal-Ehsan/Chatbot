@@ -1,4 +1,4 @@
-# Sport-based chatbot ⚽🏀🏈
+# Marvel heroes chatbot 🦸‍♂️
 
 ## Task A:
 Rule-based and similarity-based conversation features
