@@ -1,4 +1,4 @@
-# Marvel heroes chatbot 🦸‍♂️
+# Superheroes chatbot 🦸‍♂️
 
 ## Task A:
 Rule-based and similarity-based conversation features
