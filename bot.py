@@ -3,8 +3,7 @@ import json
 import requests
 import aiml
 
-# Insert personal key here if you want to use this
-api_key = '5403a1e0442ce1dd18cb1bf7c40e776f'
+api_key = '0e38947d9fd0fa5969c4735f293ab28c'
 
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
@@ -29,7 +28,7 @@ while True:
     if answer[0] == '#':
         params = answer[1:].split('$') # Array of parameters
         cmd = int(params[0])
-        if cmd == 0:
+        if cmd == 0:#1$
             print(params[1])
             break
         elif cmd == 1:
@@ -40,7 +39,7 @@ while True:
                 print('Sorry, I do not know that. Be more specific!')
         elif cmd == 2:
             succeeded = False
-            api_url = r'http://api.openweathermap.org/data/2.5/weather?q=' # Raw string
+            api_url = r'http://api.openweathermap.org/data/2.5/weather?q='
             response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+api_key))
             if response.status_code == 200:
                 response_json = json.loads(response.content)
