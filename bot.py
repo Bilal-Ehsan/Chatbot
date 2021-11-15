@@ -52,8 +52,8 @@ while True:
                     wsp = response_json['wind']['speed']
                     wdir = response_json['wind']['deg']
                     conditions = response_json['weather'][0]['description']
-                    print('The temperature is', t, '°C, varying between', tmi, 'and', tma, 'at the \
-                        moment, humidity is', hum, '%, wind speed ', wsp, 'm/s,', conditions)
+                    print(f'The temperature is {t} °C, varying between {tmi} and {tma} at the' \
+                        f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}')
                     succeeded = True
             if not succeeded:
                 print('Sorry, I could not resolve the location you gave me.')
