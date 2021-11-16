@@ -26,9 +26,9 @@ while True:
         answer = kern.respond(user_input) # Compute response
     # Post-process the answer for commands
     if answer[0] == '#':
-        params = answer[1:].split('$') # Array of parameters
+        params = answer[1:].split('$')
         cmd = int(params[0])
-        if cmd == 0:#1$
+        if cmd == 0:
             print(params[1])
             break
         elif cmd == 1:
