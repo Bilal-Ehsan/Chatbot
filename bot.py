@@ -3,8 +3,10 @@ import json
 import requests
 import aiml
 from termcolor import colored
+import pyttsx3
 
 api_key = '0e38947d9fd0fa5969c4735f293ab28c'
+engine = pyttsx3.init() # Engine instance for the speech synthesis
 
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
@@ -30,7 +32,9 @@ while True:
         params = answer[1:].split('$')
         cmd = int(params[0])
         if cmd == 0:
-            print(params[1])
+            print(colored(params[1], 'magenta'))
+            engine.say(params[1])
+            engine.runAndWait()
             break
         elif cmd == 1:
             try:
@@ -58,6 +62,10 @@ while True:
             if not succeeded:
                 print('\x1B[3mSorry, I could not resolve the location you gave me.\x1B[0m')
         elif cmd == 99:
+            # Similarity-based
             print('\x1B[3mI did not get that, please try again.\x1B[0m')
+            print(colored('\x1B[3mReminder: Do similarity-based stuff from here...\x1B[0m', 'red'))
     else:
         print(colored(answer, 'magenta'))
+        engine.say(answer)
+        engine.runAndWait()
