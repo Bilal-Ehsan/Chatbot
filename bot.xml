@@ -1,6 +1,7 @@
 <aiml version="1.0.1" encoding="UTF-8">
 
 <!-- Greetings and politeness -->
+
 <category> 
   <pattern>HELLO</pattern>
   <template>Hello! How are you?</template> 
@@ -22,6 +23,11 @@
 </category>
 
 <category> 
+  <pattern>HEY</pattern>
+  <template><srai>HELLO</srai></template>
+</category>
+
+<category> 
   <pattern>HOW ARE YOU</pattern>
   <template>I'm functioning within normal parameters, thanks for asking.</template>
 </category>
@@ -29,6 +35,11 @@
 <category>
   <pattern>I AM FINE</pattern>
   <template>That's good to know. What would you like to discuss about?</template>
+</category>
+
+<category>
+  <pattern>GOOD</pattern>
+  <template><srai>I AM FINE</srai></template>
 </category>
 
 <category>
@@ -56,17 +67,8 @@
   <template><srai>THANKS</srai></template>
 </category>
 
-<category>
-  <pattern>CHEERS</pattern>
-  <template>Sure mate.</template>
-</category>
-
-<category> 
-  <pattern>CHEERS *</pattern>
-  <template>Sure mate.</template>
-</category>
-
 <!-- Weather API -->
+
 <category>
   <pattern>WHAT IS THE WEATHER LIKE IN *</pattern>
   <template>#2$ <star/></template>
@@ -78,6 +80,7 @@
 </category>
 
 <!--- Wikipedia API -->
+
 <category>
   <pattern>WHAT IS A *</pattern>
   <template>#1$ <star index="1"/></template>
@@ -101,6 +104,45 @@
 <category>
   <pattern>WHO IS *</pattern>
   <template><srai>WHAT IS A <star/></srai></template>
+</category>
+
+<!-- Superheroes related talk -->
+
+<category>
+  <pattern>WHO IS YOUR FAVOURITE SUPERHERO</pattern>
+  <template>I'd have to go with Spider-Man! Who is yours?</template>
+</category>
+
+<category>
+  <pattern>MARVEL OR DC</pattern>
+  <template>I like them both... but Marvel takes the lead.</template>
+</category>
+
+<!-- General -->
+
+<category>
+  <pattern>SAME</pattern>
+  <template>Wow. We're so alike.</template>
+</category>
+
+<category>
+  <pattern>SUPERHEROES</pattern>
+  <template>I love me some superheroes.</template>
+</category>
+
+<category>
+  <pattern>HEROES</pattern>
+  <template><srai>SUPERHEROES</srai></template>
+</category>
+
+<category>
+  <pattern>I LIKE YOU</pattern>
+  <template>I like you too, fellow human (I'm secretly a human too shhh...)</template>
+</category>
+
+<category>
+  <pattern>I LOVE YOU</pattern>
+  <template>I'm blushing...</template>
 </category>
 
 <!-- Default reaction -->
