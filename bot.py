@@ -2,6 +2,7 @@ import wikipedia
 import json
 import requests
 import aiml
+from termcolor import colored
 
 api_key = '0e38947d9fd0fa5969c4735f293ab28c'
 
@@ -10,14 +11,14 @@ kern = aiml.Kernel()
 kern.setTextEncoding(None)
 kern.bootstrap(learnFiles='bot.xml')
 
-print('Welcome to the chatbot! Got a question?')
+print(colored('\033[1mWelcome to the chatbot! Got a question?\033[0m', 'green'))
 
 # Main loop
 while True:
     try:
-        user_input = input('> ')
+        user_input = input(colored('> ', 'blue'))
     except (KeyboardInterrupt, EOFError) as e:
-        print('Uh oh... Something unexpected happened. Bye!')
+        print('\x1B[3mUh oh... Something unexpected happened. Bye!\x1B[0m')
         break
     # Pre-process user input and determine response agent (if needed)
     response_agent = 'aiml'
@@ -36,7 +37,7 @@ while True:
                 summary = wikipedia.summary(params[1], sentences=3, auto_suggest=False)
                 print(summary)
             except:
-                print('Sorry, I do not know that. Be more specific!')
+                print('\x1B[3mSorry, I do not know that. Be more specific!\x1B[0m')
         elif cmd == 2:
             succeeded = False
             api_url = r'http://api.openweathermap.org/data/2.5/weather?q='
@@ -55,8 +56,8 @@ while True:
                         f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}')
                     succeeded = True
             if not succeeded:
-                print('Sorry, I could not resolve the location you gave me.')
+                print('\x1B[3mSorry, I could not resolve the location you gave me.\x1B[0m')
         elif cmd == 99:
-            print('I did not get that, please try again.')
+            print('\x1B[3mI did not get that, please try again.\x1B[0m')
     else:
-        print(answer)
+        print(colored(answer, 'magenta'))
