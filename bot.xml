@@ -167,7 +167,12 @@
   <pattern>MY NAME IS *</pattern>
 
   <template>
-    Hello <set name="username"><star/></set>
+    <random>
+      <li>Nice name you got there<think><set name="username"><star/></set></think></li>
+      <li>Hello!<think><set name="username"><star/></set></think></li>
+      <li>I'll remember that ;)<think><set name="username"><star/></set></think></li>
+      <li>And I am... Wait I forgot<think><set name="username"><star/></set></think></li>
+    </random>
   </template>
 </category>
 
