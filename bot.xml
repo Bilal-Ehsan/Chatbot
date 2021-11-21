@@ -4,7 +4,16 @@
 
 <category> 
   <pattern>HELLO</pattern>
-  <template>Hello! How are you?</template> 
+
+  <template>
+    <random>
+      <li>Hello! How are you?</li>
+      <li>Hey, what's up?</li>
+      <li>How's it going?</li>
+      <li>Hello there!</li>
+      <li>Hey! What's your name?</li>
+    </random>
+  </template> 
 </category>
 
 <category> 
@@ -44,7 +53,15 @@
 
 <category>
   <pattern>BYE</pattern>
-  <template>#0$Bye! Nice talking to you. You take care now.</template>
+
+  <template>
+    <random>
+      <li>#0$I look forward to talking to you again :)</li>
+      <li>#0$Bye! Nice talking to you. You take care now.</li>
+      <li>#0$See you next time!</li>
+      <li>#0$Don't miss me too much ;)</li>
+    </random>
+  </template>
 </category>
 
 <category>
