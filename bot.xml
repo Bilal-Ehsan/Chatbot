@@ -56,11 +56,11 @@
 
   <template>
     <random>
-      <li>#0$I look forward to talking to you again :)</li>
-      <li>#0$Bye! Nice talking to you. You take care now.</li>
-      <li>#0$See you next time!</li>
-      <li>#0$Don't miss me too much ;)</li>
-      <li>#0$See ya!</li>
+      <li>#0$I look forward to talking to you again <get name="username"/></li>
+      <li>#0$Bye! Nice talking to you <get name="username"/></li>
+      <li>#0$See you next time <get name="username"/></li>
+      <li>#0$Don't miss me too much <get name="username"/></li>
+      <li>#0$See ya <get name="username"/></li>
     </random>
   </template>
 </category>
@@ -163,7 +163,30 @@
   <template>I'm blushing...</template>
 </category>
 
-<!-- Default reaction -->
+<category>
+  <pattern>MY NAME IS *</pattern>
+
+  <template>
+    Hello <set name="username"><star/></set>
+  </template>
+</category>
+
+<category>
+  <pattern>I AM *</pattern>
+  <template><srai>MY NAME IS <star/></srai></template>
+</category>#
+
+<category>
+  <pattern>WHO AM I</pattern>
+  <template>Well, you're <get name="username"/> of course</template>
+</category>
+
+<category>
+  <pattern>WHAT IS MY NAME</pattern>
+  <template><srai>WHO AM I</srai></template>
+</category>
+
+<!-- Default reaction (no suitable match found) -->
 <category>
   <pattern>*</pattern>
   <template>#99$ <star index="1"/></template>
