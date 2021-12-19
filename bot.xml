@@ -136,6 +136,11 @@
   <template>I like them both... but Marvel takes the lead.</template>
 </category>
 
+<category>
+  <pattern>PROMPTS</pattern>
+  <template>#3$</template>
+</category>
+
 <!-- General -->
 
 <category>

@@ -14,7 +14,15 @@ kern = aiml.Kernel()
 kern.setTextEncoding(None)
 kern.bootstrap(learnFiles='bot.xml')
 
-print(colored('\033[1mWelcome to the chatbot! Got a question?\033[0m', 'green'))
+print(colored('\033[1mWelcome to the chatbot! I\'m good at talking about superheroes (or villains!)\033[0m', 'green'))
+print(colored('\033[1mFor a cool list of prompts, enter \x1B[3mprompts\x1B[0m!\033[0m', 'green'))
+
+
+def show_prompts():
+    print(colored('\nTry asking...\n', 'cyan'))
+    print('Placeholder')
+    print('Placeholder')
+    print('Placeholder\n')
 
 
 def main():
@@ -57,13 +65,14 @@ def main():
                         tma = response_json['main']['temp_max']
                         hum = response_json['main']['humidity']
                         wsp = response_json['wind']['speed']
-                        wdir = response_json['wind']['deg']
                         conditions = response_json['weather'][0]['description']
                         print(f'The temperature is {t} °C, varying between {tmi} and {tma} at the' \
                             f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}')
                         succeeded = True
                 if not succeeded:
                     print('\x1B[3mSorry, I could not resolve the location you gave me.\x1B[0m')
+            elif cmd == 3:
+                show_prompts()
             elif cmd == 99:
                 # Similarity-based
                 print('\x1B[3mI did not get that, please try again.\x1B[0m')
