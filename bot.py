@@ -9,7 +9,7 @@ import webbrowser
 
 weather_api_key = '0e38947d9fd0fa5969c4735f293ab28c'
 superhero_api_key = '3106208826265119'
-engine = pyttsx3.init() # Engine instance for the speech synthesis
+engine = pyttsx3.init()  # Engine instance for the speech synthesis
 
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
@@ -67,7 +67,7 @@ def main():
         response_agent = 'aiml'
         # Activate selected response agent
         if response_agent == 'aiml':
-            answer = kern.respond(user_input) # Compute response
+            answer = kern.respond(user_input)  # Compute response
         # Post-process the answer for commands
         if answer[0] == '#':
             params = answer[1:].split('$')
