@@ -5,10 +5,9 @@ import aiml
 from termcolor import colored
 import pyttsx3
 import webbrowser
+import config
 
 
-weather_api_key = '0e38947d9fd0fa5969c4735f293ab28c'
-superhero_api_key = '3106208826265119'
 engine = pyttsx3.init()  # Engine instance for the speech synthesis
 
 # The Kernel object is the public interface to the AIML interpreter
@@ -28,7 +27,7 @@ def show_prompts():
 
 
 def show_stats(superhero):
-    response = requests.get(f'https://superheroapi.com/api/{superhero_api_key}/search/{superhero}')
+    response = requests.get(f'https://superheroapi.com/api/{config.superhero_api_key}/search/{superhero}')
     if response.status_code == 200:
         response_json = json.loads(response.content)
         print(response_json)
@@ -48,7 +47,7 @@ def show_stats(superhero):
 
 
 def show_image(superhero):
-    response = requests.get(f'https://superheroapi.com/api/{superhero_api_key}/search/{superhero}')
+    response = requests.get(f'https://superheroapi.com/api/{config.superhero_api_key}/search/{superhero}')
     if response.status_code == 200:
         response_json = json.loads(response.content)
         image = response_json['results'][0]['image'].get('url')
@@ -86,7 +85,7 @@ def main():
             elif cmd == 2:
                 succeeded = False
                 api_url = r'http://api.openweathermap.org/data/2.5/weather?q='
-                response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+weather_api_key))
+                response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+config.weather_api_key))
                 if response.status_code == 200:
                     response_json = json.loads(response.content)
                     if response_json:
@@ -108,7 +107,7 @@ def main():
             elif cmd == 5:
                 show_image(params[1].strip())
             elif cmd == 99:
-                # Similarity-based
+                # Similarity-based stuff
                 print('\x1B[3mI did not get that, please try again.\x1B[0m')
                 print(colored('\x1B[3mReminder: Do similarity-based stuff from here...\x1B[0m', 'red'))
         else:
