@@ -7,6 +7,7 @@ import pyttsx3
 import webbrowser
 from dotenv import load_dotenv
 import os
+import random
 
 
 load_dotenv()
@@ -26,7 +27,7 @@ def show_prompts():
     print(colored('\nTry asking...\n', 'cyan'))
     print('Show me the stats of \033[1m[superhero]\033[0m')
     print('Show me a picture of \033[1m[superhero]\033[0m')
-    print('Placeholder...\n')
+    print('Show me a picture of a \033[1mrandom\033[0m superhero\n')
 
 
 def show_stats(superhero):
@@ -52,11 +53,21 @@ def show_stats(superhero):
 
 
 def show_image(superhero):
+    if superhero == 'random':
+        superhero_id = random.randint(1, 732)
+        link = f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/{superhero_id}/image'
+    else:
+        link = f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}'
+
     try:
-        response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
+        response = requests.get(link)
         if response.status_code == 200:
             response_json = json.loads(response.content)
-            image = response_json['results'][0]['image'].get('url')
+
+            if superhero == 'random':
+                image = response_json.get('url')
+            else:
+                image = response_json['results'][0]['image'].get('url')
             webbrowser.open(image)
     except:
         print(f'\x1B[3mSorry, I couldn\'t find a picture of {superhero}!\x1B[0m')
@@ -117,6 +128,8 @@ def main():
                 show_stats(params[1].strip())
             elif cmd == 5:
                 show_image(params[1].strip())
+            elif cmd == 6:
+                show_image('random')
             elif cmd == 99:
                 # Similarity-based stuff
                 print('\x1B[3mI did not get that, please try again.\x1B[0m')

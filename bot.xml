@@ -152,6 +152,11 @@
 </category>
 
 <category>
+  <pattern>SHOW ME A PICTURE OF A RANDOM SUPERHERO</pattern>
+  <template>#6$</template>
+</category>
+
+<category>
   <pattern>WHO ARE IN THE AVENGERS</pattern>
   <template>The original 6 are Iron Man, Captain America, Hulk, Thor, Hawkeye and Black Widwow</template>
 </category>
