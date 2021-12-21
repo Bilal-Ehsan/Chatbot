@@ -5,8 +5,11 @@ import aiml
 from termcolor import colored
 import pyttsx3
 import webbrowser
-import config
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv()
 
 engine = pyttsx3.init()  # Engine instance for the speech synthesis
 
@@ -27,27 +30,27 @@ def show_prompts():
 
 
 def show_stats(superhero):
-    response = requests.get(f'https://superheroapi.com/api/{config.superhero_api_key}/search/{superhero}')
+    response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
     if response.status_code == 200:
         response_json = json.loads(response.content)
         print(response_json)
         power_stats = response_json['results'][0]['powerstats']
         biography = response_json['results'][0]['appearance']
         work = response_json['results'][0]['work']
-        print(f'-> {superhero} related info:\n')
+        print(colored(f'-> {superhero} related info:\n', 'cyan'))
 
         for x, y in power_stats.items():
             print(f'{x.capitalize()} - {y}')
-        print('')
+        print()
         for x, y in biography.items():
             print(f'{x.capitalize()} - {y}')
-        print('')
+        print()
         for x, y in work.items():
             print(f'{x.capitalize()} - {y}')
 
 
 def show_image(superhero):
-    response = requests.get(f'https://superheroapi.com/api/{config.superhero_api_key}/search/{superhero}')
+    response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
     if response.status_code == 200:
         response_json = json.loads(response.content)
         image = response_json['results'][0]['image'].get('url')
@@ -71,6 +74,7 @@ def main():
         if answer[0] == '#':
             params = answer[1:].split('$')
             cmd = int(params[0])
+
             if cmd == 0:
                 print(colored(params[1], 'magenta'))
                 engine.say(params[1])
@@ -85,7 +89,9 @@ def main():
             elif cmd == 2:
                 succeeded = False
                 api_url = r'http://api.openweathermap.org/data/2.5/weather?q='
-                response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+config.weather_api_key))
+                response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+
+                                        os.getenv("WEATHER_API_KEY")))
+
                 if response.status_code == 200:
                     response_json = json.loads(response.content)
                     if response_json:
