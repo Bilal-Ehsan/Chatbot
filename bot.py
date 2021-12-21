@@ -30,31 +30,36 @@ def show_prompts():
 
 
 def show_stats(superhero):
-    response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
-    if response.status_code == 200:
-        response_json = json.loads(response.content)
-        print(response_json)
-        power_stats = response_json['results'][0]['powerstats']
-        biography = response_json['results'][0]['appearance']
-        work = response_json['results'][0]['work']
-        print(colored(f'-> {superhero} related info:\n', 'cyan'))
+    try:
+        response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
+        if response.status_code == 200:
+            response_json = json.loads(response.content)
+            power_stats = response_json['results'][0]['powerstats']
+            biography = response_json['results'][0]['appearance']
+            work = response_json['results'][0]['work']
+            print(colored(f'-> {superhero} related info:\n', 'cyan'))
 
-        for x, y in power_stats.items():
-            print(f'{x.capitalize()} - {y}')
-        print()
-        for x, y in biography.items():
-            print(f'{x.capitalize()} - {y}')
-        print()
-        for x, y in work.items():
-            print(f'{x.capitalize()} - {y}')
+            for x, y in power_stats.items():
+                print(f'{x.capitalize()} - {y}')
+            print()
+            for x, y in biography.items():
+                print(f'{x.capitalize()} - {y}')
+            print()
+            for x, y in work.items():
+                print(f'{x.capitalize()} - {y}')
+    except:
+        print(f'\x1B[3mSorry, I couldn\'t find the stats of {superhero}!\x1B[0m')
 
 
 def show_image(superhero):
-    response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
-    if response.status_code == 200:
-        response_json = json.loads(response.content)
-        image = response_json['results'][0]['image'].get('url')
-        webbrowser.open(image)
+    try:
+        response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
+        if response.status_code == 200:
+            response_json = json.loads(response.content)
+            image = response_json['results'][0]['image'].get('url')
+            webbrowser.open(image)
+    except:
+        print(f'\x1B[3mSorry, I couldn\'t find a picture of {superhero}!\x1B[0m')
 
 
 def main():
