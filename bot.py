@@ -81,6 +81,7 @@ def show_image(superhero):
         print(f'\x1B[3mSorry, I couldn\'t find a picture of {superhero}!\x1B[0m')
 
 
+# BUG - Only works the first time
 def similarity_check(query):
     data = []
     for row in reader:
@@ -185,7 +186,6 @@ def main():
             elif cmd == 6:
                 show_image('random')
             elif cmd == 99:
-                # Similarity-based reasoning
                 similarity_check(params[1].strip())
         else:
             print(colored(answer, 'magenta'))
