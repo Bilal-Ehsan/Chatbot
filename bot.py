@@ -90,7 +90,6 @@ def similarity_check(query):
         data.append([question, answer])
 
     tokenised_sentences = []
-
     for i in range(len(data)):
         tokens = sent_tokenize(data[i][0])
         for line in tokens:
@@ -119,11 +118,13 @@ def similarity_check(query):
 
     # Perform a similarity query against the corpus
     query_doc_tf_idf = tf_idf[query_doc_bow]
-    # print(f'Comparing result: {sims[query_doc_tf_idf].tolist()}')
 
     closest = max(sims[query_doc_tf_idf].tolist())
     closest_line_num = sims[query_doc_tf_idf].tolist().index(closest)
-    print(data[closest_line_num][1])  # Answer
+
+    print(colored(data[closest_line_num][1], 'magenta'))  # Answer
+    engine.say(data[closest_line_num][1])
+    engine.runAndWait()
 
     # print('\x1B[3mI did not get that, please try again.\x1B[0m')
 
