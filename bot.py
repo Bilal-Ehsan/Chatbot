@@ -98,7 +98,6 @@ def similarity_check(query):
     # Tokenise each word in each sentence
     gen_docs = [[w.lower() for w in word_tokenize(text)] 
                 for text in tokenised_sentences]
-
     dictionary = gensim.corpora.Dictionary(gen_docs)  # Maps every word to a number
     corpus = [dictionary.doc2bow(gen_doc) for gen_doc in gen_docs]  # Bag of words
 
@@ -119,13 +118,13 @@ def similarity_check(query):
     # Perform a similarity query against the corpus
     query_doc_tf_idf = tf_idf[query_doc_bow]
 
-    closest = max(sims[query_doc_tf_idf].tolist())
+    closest = max(sims[query_doc_tf_idf].tolist())  # FIXME - Fails here
     closest_line_num = sims[query_doc_tf_idf].tolist().index(closest)
 
     print(colored(data[closest_line_num][1], 'magenta'))  # Answer
     engine.say(data[closest_line_num][1])
     engine.runAndWait()
-
+    
     # print('\x1B[3mI did not get that, please try again.\x1B[0m')
 
 
