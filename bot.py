@@ -23,10 +23,6 @@ kern = aiml.Kernel()
 kern.setTextEncoding(None)
 kern.bootstrap(learnFiles='bot.xml')
 
-path_to_csv = f'{pathlib.Path().resolve()}\qa_pairs.csv'
-file = open(path_to_csv, newline='')
-reader = csv.reader(file)
-
 print(colored('\033[1mWelcome to the chatbot! I like to talk about superheroes!\033[0m', 'green'))
 print(colored('\033[1mFor a cool list of prompts, enter \x1B[3mprompts\x1B[0m!\033[0m', 'green'))
 
@@ -81,8 +77,11 @@ def show_image(superhero):
         print(f'\x1B[3mSorry, I couldn\'t find a picture of {superhero}!\x1B[0m')
 
 
-# BUG - Only works the first time
 def similarity_check(query):
+    path_to_csv = f'{pathlib.Path().resolve()}\qa_pairs.csv'
+    file = open(path_to_csv, newline='')
+    reader = csv.reader(file)
+
     data = []
     for row in reader:
         question = row[0]
@@ -118,7 +117,7 @@ def similarity_check(query):
     # Perform a similarity query against the corpus
     query_doc_tf_idf = tf_idf[query_doc_bow]
 
-    closest = max(sims[query_doc_tf_idf].tolist())  # FIXME - Fails here
+    closest = max(sims[query_doc_tf_idf].tolist())
     closest_line_num = sims[query_doc_tf_idf].tolist().index(closest)
 
     print(colored(data[closest_line_num][1], 'magenta'))  # Answer

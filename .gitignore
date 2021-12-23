@@ -1,4 +1,6 @@
 config.py
 __pycache__
 .env
+
+# Does not work. I don't know why.
 workdir/
