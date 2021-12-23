@@ -34,6 +34,36 @@ def show_prompts():
     print('Show me a picture of a \033[1mrandom\033[0m superhero\n')
 
 
+def wikipedia_search(params):
+    try:
+        summary = wikipedia.summary(params[1], sentences=3, auto_suggest=False)
+        print(summary)
+    except:
+        print('\x1B[3mSorry, I do not know that. Be more specific!\x1B[0m')
+
+
+def get_weather(params):
+    succeeded = False
+    api_url = r'http://api.openweathermap.org/data/2.5/weather?q='
+    response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+
+                            os.getenv("WEATHER_API_KEY")))
+
+    if response.status_code == 200:
+        response_json = json.loads(response.content)
+        if response_json:
+            t = response_json['main']['temp']
+            tmi = response_json['main']['temp_min']
+            tma = response_json['main']['temp_max']
+            hum = response_json['main']['humidity']
+            wsp = response_json['wind']['speed']
+            conditions = response_json['weather'][0]['description']
+            print(f'The temperature is {t} °C, varying between {tmi} and {tma} at the' \
+                f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}')
+            succeeded = True
+    if not succeeded:
+        print('\x1B[3mSorry, I could not resolve the location you gave me.\x1B[0m')
+
+
 def show_stats(superhero):
     try:
         response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
@@ -154,31 +184,9 @@ def main():
                 engine.runAndWait()
                 break
             elif cmd == 1:
-                try:
-                    summary = wikipedia.summary(params[1], sentences=3, auto_suggest=False)
-                    print(summary)
-                except:
-                    print('\x1B[3mSorry, I do not know that. Be more specific!\x1B[0m')
+                wikipedia_search(params)
             elif cmd == 2:
-                succeeded = False
-                api_url = r'http://api.openweathermap.org/data/2.5/weather?q='
-                response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+
-                                        os.getenv("WEATHER_API_KEY")))
-
-                if response.status_code == 200:
-                    response_json = json.loads(response.content)
-                    if response_json:
-                        t = response_json['main']['temp']
-                        tmi = response_json['main']['temp_min']
-                        tma = response_json['main']['temp_max']
-                        hum = response_json['main']['humidity']
-                        wsp = response_json['wind']['speed']
-                        conditions = response_json['weather'][0]['description']
-                        print(f'The temperature is {t} °C, varying between {tmi} and {tma} at the' \
-                            f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}')
-                        succeeded = True
-                if not succeeded:
-                    print('\x1B[3mSorry, I could not resolve the location you gave me.\x1B[0m')
+                get_weather(params)
             elif cmd == 3:
                 show_prompts()
             elif cmd == 4:
