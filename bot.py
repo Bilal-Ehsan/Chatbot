@@ -109,7 +109,7 @@ def show_image(superhero):
 
 def similarity_check(query):
     try:
-        path_to_csv = f'{pathlib.Path().resolve()}\qa_pairs.csv'
+        path_to_csv = f'{pathlib.Path().resolve()}\csv\qa_pairs.csv'
         file = open(path_to_csv, newline='')
         reader = csv.reader(file)
 
