@@ -1,1 +1,4 @@
-add facts
+Superhero(x) -> Good(x)
+Supervillain(x) -> Bad(x)
+Superhero(Superman)
+Supervillain(Thanos)
