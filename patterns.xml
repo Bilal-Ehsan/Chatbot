@@ -223,15 +223,9 @@
       <li>Nice name you got there<think><set name="username"><star/></set></think></li>
       <li>Hello!<think><set name="username"><star/></set></think></li>
       <li>I'll remember that ;)<think><set name="username"><star/></set></think></li>
-      <li>And my name is... Wait I don't have one yet<think><set name="username"><star/></set></think></li>
     </random>
   </template>
 </category>
-
-<category>
-  <pattern>I AM *</pattern>
-  <template><srai>MY NAME IS <star/></srai></template>
-</category>#
 
 <category>
   <pattern>WHO AM I</pattern>

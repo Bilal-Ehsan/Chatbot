@@ -27,10 +27,10 @@ read_expr = Expression.fromstring
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
 kern.setTextEncoding(None)
-kern.bootstrap(learnFiles='bot.xml')
+kern.bootstrap(learnFiles='patterns.xml')
 
 kb = []
-data = pandas.read_csv(f'{pathlib.Path().resolve()}\..\csv\knowledge_base.csv', header=None)
+data = pandas.read_csv(f'{pathlib.Path().resolve()}\csv\knowledge_base.csv', header=None)
 [kb.append(read_expr(row)) for row in data[0]]
 
 inputs = [
@@ -133,7 +133,7 @@ def show_image(superhero):
 
 def similarity_check(query):
     try:
-        path_to_csv = f'{pathlib.Path().resolve()}\..\csv\qa_pairs.csv'
+        path_to_csv = f'{pathlib.Path().resolve()}\csv\qa_pairs.csv'
         file = open(path_to_csv, newline='')
         reader = csv.reader(file)
 
@@ -194,8 +194,12 @@ def add_to_kb(q):
     if result:
         kb.append(expr)
         print(Fore.LIGHTMAGENTA_EX + 'Okay, I\'ll remember that!')
+        engine.say('Okay, I\'ll remember that!')
+        engine.runAndWait()
     else:
         print(Fore.LIGHTMAGENTA_EX + 'My (limited) sources tell me that may not be true...')
+        engine.say('My (limited) sources tell me that may not be true...')
+        engine.runAndWait()
 
 
 def main():
