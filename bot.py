@@ -2,8 +2,8 @@ import wikipedia
 import json
 import requests
 import aiml
-# import colorama
-# from colorama import Fore
+import colorama
+from colorama import Fore
 import pyttsx3
 import webbrowser
 from dotenv import load_dotenv
@@ -19,19 +19,19 @@ import gensim
 # Initialisations
 load_dotenv()
 engine = pyttsx3.init()  # Engine instance for the speech synthesis
-# colorama.init(autoreset=True)
+colorama.init(autoreset=True)
 
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
 kern.setTextEncoding(None)
 kern.bootstrap(learnFiles='bot.xml')
 
-print('Welcome to the chatbot! I like to talk about superheroes')
-print('For a cool list of prompts, enter "prompts"!')
+print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superheroes')
+print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter "prompts"!')
 
 
 def show_prompts():
-    print('\nTry asking...\n')
+    print(Fore.LIGHTCYAN_EX + '\nTry asking...\n')
     print('Show me the stats of [superhero]')
     print('Show me a picture of [superhero]')
     print('Show me a picture of a random superhero\n')
@@ -42,7 +42,7 @@ def wikipedia_search(params):
         summary = wikipedia.summary(params[1], sentences=3, auto_suggest=False)
         print(summary)
     except:
-        print('Sorry, I do not know that. Be more specific!')
+        print(Fore.LIGHTRED_EX + 'Sorry, I do not know that. Be more specific!')
 
 
 def get_weather(params):
@@ -64,7 +64,7 @@ def get_weather(params):
                 f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}')
             succeeded = True
     if not succeeded:
-        print('Sorry, I could not resolve the location you gave me.')
+        print(Fore.LIGHTRED_EX + 'Sorry, I could not resolve the location you gave me.')
 
 
 def show_stats(superhero):
@@ -75,7 +75,7 @@ def show_stats(superhero):
             power_stats = response_json['results'][0]['powerstats']
             biography = response_json['results'][0]['appearance']
             work = response_json['results'][0]['work']
-            print(f'-> {superhero} related info:\n')
+            print(f'{Fore.LIGHTCYAN_EX}-> {superhero} related info:\n')
 
             for x, y in power_stats.items():
                 print(f'{x.capitalize()} - {y}')
@@ -86,7 +86,7 @@ def show_stats(superhero):
             for x, y in work.items():
                 print(f'{x.capitalize()} - {y}')
     except:
-        print(f'Sorry, I couldn\'t find the stats of {superhero}!')
+        print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find the stats of {superhero}!')
 
 
 def show_image(superhero):
@@ -107,7 +107,7 @@ def show_image(superhero):
                 image = response_json['results'][0]['image'].get('url')
             webbrowser.open(image)
     except:
-        print(f'Sorry, I couldn\'t find a picture of {superhero}!')
+        print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find a picture of {superhero}!')
 
 
 def similarity_check(query):
@@ -156,11 +156,11 @@ def similarity_check(query):
         if closest < 0.7:
             raise Exception('Closest value too low')
 
-        print(data[closest_line_num][1]) # Answer
+        print(Fore.LIGHTMAGENTA_EX + data[closest_line_num][1]) # Answer
         engine.say(data[closest_line_num][1])
         engine.runAndWait()
     except Exception:
-        print('I did not get that, please try again.')
+        print(Fore.LIGHTRED_EX + 'I did not get that, please try again.')
 
 
 def main():
@@ -168,7 +168,7 @@ def main():
         try:
             user_input = input('> ')
         except (KeyboardInterrupt, EOFError) as e:
-            print('Uh oh... Something unexpected happened. Bye!')
+            print(Fore.LIGHTRED_EX + 'Uh oh... Something unexpected happened. Bye!')
             break
 
         # Pre-process user input and determine response agent (if needed)
@@ -182,7 +182,7 @@ def main():
             cmd = int(params[0])
 
             if cmd == 0:
-                print(params[1])
+                print(Fore.LIGHTMAGENTA_EX + params[1])
                 engine.say(params[1])
                 engine.runAndWait()
                 break
@@ -205,7 +205,7 @@ def main():
             elif cmd == 99:
                 similarity_check(params[1].strip())
         else:
-            print(answer)
+            print(Fore.LIGHTMAGENTA_EX + answer)
             engine.say(answer)
             engine.runAndWait()
 
