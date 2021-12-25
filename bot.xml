@@ -166,6 +166,18 @@
   <template>Superman, Batman, Wonder Woman, Aquaman, Flash and Cyborg</template>
 </category>
 
+<!-- Logical reasoning -->
+
+<category>
+  <pattern>I KNOW THAT * IS *</pattern>
+  <template>#7$ <star index="1"/> is <star index="2"/></template>
+</category>
+
+<category>
+  <pattern>CHECK THAT * IS *</pattern>
+  <template>#8$ <star index="1"/> is <star index="2"/></template>
+</category>
+
 <!-- General -->
 
 <category>

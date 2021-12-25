@@ -195,6 +195,10 @@ def main():
                 show_image(params[1].strip())
             elif cmd == 6:
                 show_image('random')
+            elif cmd == 7:
+                pass  # Add logic
+            elif cmd == 8:
+                pass  # Add logic
             elif cmd == 99:
                 similarity_check(params[1].strip())
         else:
