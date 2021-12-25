@@ -34,9 +34,10 @@ data = pandas.read_csv(f'{pathlib.Path().resolve()}\..\csv\knowledge_base.csv', 
 [kb.append(read_expr(row)) for row in data[0]]
 
 inputs = [
-    read_expr('Good(Superman)'),
     read_expr('Superhero(Superman)'),
-    read_expr('-Superhero(Joker)')
+    read_expr('Supervillain(Thanos)'),
+    read_expr('Good(Superman)'),
+    read_expr('Bad(Thanos)')
 ]
 
 # Check initial KB for contradictions
@@ -183,9 +184,18 @@ def similarity_check(query):
         print(Fore.LIGHTRED_EX + 'I did not get that, please try again.')
 
 
-def add_to_kb():
-    # TODO - Check if the user input contradicts with anything in the KB, if not, add to KB
-    pass
+def add_to_kb(q):
+    object, subject = q.split('is')
+    expr = read_expr(f'{subject}({object})')
+    if expr in kb:
+        print(Fore.LIGHTMAGENTA_EX + 'I already knew that!')
+        return
+    result = ResolutionProver().prove(expr, kb)
+    if result:
+        kb.append(expr)
+        print(Fore.LIGHTMAGENTA_EX + 'Okay, I\'ll remember that!')
+    else:
+        print(Fore.LIGHTMAGENTA_EX + 'My (limited) sources tell me that may not be true...')
 
 
 def main():
@@ -224,7 +234,7 @@ def main():
             elif cmd == 6:
                 show_image('random')
             elif cmd == 7:
-                pass  # Add logic
+                add_to_kb(params[1].strip())
             elif cmd == 8:
                 pass  # Add logic
             elif cmd == 99:
