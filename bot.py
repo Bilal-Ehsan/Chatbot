@@ -2,7 +2,8 @@ import wikipedia
 import json
 import requests
 import aiml
-from termcolor import colored
+# import colorama
+# from colorama import Fore
 import pyttsx3
 import webbrowser
 from dotenv import load_dotenv
@@ -12,26 +13,28 @@ import pathlib
 import csv
 from nltk.tokenize import sent_tokenize, word_tokenize
 import gensim
+# import pandas
 
 
+# Initialisations
 load_dotenv()
-
 engine = pyttsx3.init()  # Engine instance for the speech synthesis
+# colorama.init(autoreset=True)
 
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
 kern.setTextEncoding(None)
 kern.bootstrap(learnFiles='bot.xml')
 
-print(colored('\033[1mWelcome to the chatbot! I like to talk about superheroes!\033[0m', 'green'))
-print(colored('\033[1mFor a cool list of prompts, enter \x1B[3mprompts\x1B[0m!\033[0m', 'green'))
+print('Welcome to the chatbot! I like to talk about superheroes')
+print('For a cool list of prompts, enter "prompts"!')
 
 
 def show_prompts():
-    print(colored('\nTry asking...\n', 'cyan'))
-    print('Show me the stats of \033[1m[superhero]\033[0m')
-    print('Show me a picture of \033[1m[superhero]\033[0m')
-    print('Show me a picture of a \033[1mrandom\033[0m superhero\n')
+    print('\nTry asking...\n')
+    print('Show me the stats of [superhero]')
+    print('Show me a picture of [superhero]')
+    print('Show me a picture of a random superhero\n')
 
 
 def wikipedia_search(params):
@@ -39,7 +42,7 @@ def wikipedia_search(params):
         summary = wikipedia.summary(params[1], sentences=3, auto_suggest=False)
         print(summary)
     except:
-        print('\x1B[3mSorry, I do not know that. Be more specific!\x1B[0m')
+        print('Sorry, I do not know that. Be more specific!')
 
 
 def get_weather(params):
@@ -61,7 +64,7 @@ def get_weather(params):
                 f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}')
             succeeded = True
     if not succeeded:
-        print('\x1B[3mSorry, I could not resolve the location you gave me.\x1B[0m')
+        print('Sorry, I could not resolve the location you gave me.')
 
 
 def show_stats(superhero):
@@ -72,7 +75,7 @@ def show_stats(superhero):
             power_stats = response_json['results'][0]['powerstats']
             biography = response_json['results'][0]['appearance']
             work = response_json['results'][0]['work']
-            print(colored(f'-> {superhero} related info:\n', 'cyan'))
+            print(f'-> {superhero} related info:\n')
 
             for x, y in power_stats.items():
                 print(f'{x.capitalize()} - {y}')
@@ -83,7 +86,7 @@ def show_stats(superhero):
             for x, y in work.items():
                 print(f'{x.capitalize()} - {y}')
     except:
-        print(f'\x1B[3mSorry, I couldn\'t find the stats of {superhero}!\x1B[0m')
+        print(f'Sorry, I couldn\'t find the stats of {superhero}!')
 
 
 def show_image(superhero):
@@ -104,7 +107,7 @@ def show_image(superhero):
                 image = response_json['results'][0]['image'].get('url')
             webbrowser.open(image)
     except:
-        print(f'\x1B[3mSorry, I couldn\'t find a picture of {superhero}!\x1B[0m')
+        print(f'Sorry, I couldn\'t find a picture of {superhero}!')
 
 
 def similarity_check(query):
@@ -153,19 +156,19 @@ def similarity_check(query):
         if closest < 0.7:
             raise Exception('Closest value too low')
 
-        print(colored(data[closest_line_num][1], 'magenta'))  # Answer
+        print(data[closest_line_num][1]) # Answer
         engine.say(data[closest_line_num][1])
         engine.runAndWait()
     except Exception:
-        print('\x1B[3mI did not get that, please try again.\x1B[0m')
+        print('I did not get that, please try again.')
 
 
 def main():
     while True:
         try:
-            user_input = input(colored('> ', 'blue'))
+            user_input = input('> ')
         except (KeyboardInterrupt, EOFError) as e:
-            print('\x1B[3mUh oh... Something unexpected happened. Bye!\x1B[0m')
+            print('Uh oh... Something unexpected happened. Bye!')
             break
 
         # Pre-process user input and determine response agent (if needed)
@@ -179,7 +182,7 @@ def main():
             cmd = int(params[0])
 
             if cmd == 0:
-                print(colored(params[1], 'magenta'))
+                print(params[1])
                 engine.say(params[1])
                 engine.runAndWait()
                 break
@@ -202,7 +205,7 @@ def main():
             elif cmd == 99:
                 similarity_check(params[1].strip())
         else:
-            print(colored(answer, 'magenta'))
+            print(answer)
             engine.say(answer)
             engine.runAndWait()
 
