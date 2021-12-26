@@ -37,7 +37,9 @@ inputs = [
     read_expr('Superhero(Superman)'),
     read_expr('Supervillain(Thanos)'),
     read_expr('Good(Superman)'),
-    read_expr('Bad(Thanos)')
+    read_expr('Bad(Thanos)'),
+    read_expr('Extraterrestrial(Thor)'),
+    read_expr('Alien(Thor)')
 ]
 
 # Check initial KB for contradictions
@@ -185,8 +187,8 @@ def similarity_check(query):
 
 
 def add_to_kb(q):
-    object, subject = q.split('is')
-    expr = read_expr(f'{subject}({object})')
+    object, subject = q.split(' is ')
+    expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
     if expr in kb:
         print(Fore.LIGHTMAGENTA_EX + 'I already knew that!')
         return
@@ -197,8 +199,22 @@ def add_to_kb(q):
         engine.say('Okay, I\'ll remember that!')
         engine.runAndWait()
     else:
-        print(Fore.LIGHTMAGENTA_EX + 'My (limited) sources tell me that may not be true...')
-        engine.say('My (limited) sources tell me that may not be true...')
+        print(Fore.LIGHTMAGENTA_EX + 'I don\'t know about that...')
+        engine.say('I don\'t know about that....')
+        engine.runAndWait()
+
+
+def check_kb(q):
+    object, subject = q.split(' is ')
+    expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')  # KB syntax-specific
+    result = ResolutionProver().prove(expr, kb)
+    if result:
+        print(Fore.LIGHTMAGENTA_EX + 'That\'s correct!')
+        engine.say('That\'s correct!')
+        engine.runAndWait()
+    else:
+        print(Fore.LIGHTMAGENTA_EX + 'That may not be true...')
+        engine.say('That may not be true...')
         engine.runAndWait()
 
 
@@ -240,7 +256,7 @@ def main():
             elif cmd == 7:
                 add_to_kb(params[1].strip())
             elif cmd == 8:
-                pass  # Add logic
+                check_kb(params[1].strip())
             elif cmd == 99:
                 similarity_check(params[1].strip())
         else:

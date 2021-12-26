@@ -1,4 +1,6 @@
 Superhero(x) -> Good(x)
-Supervillain(x) -> Bad(x)
 Superhero(Superman)
 Supervillain(Thanos)
+Supervillain(x) -> Bad(x)
+Extraterrestrial(Thor)
+Extraterrestrial(x) -> Alien(x)
