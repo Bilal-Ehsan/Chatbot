@@ -33,21 +33,27 @@ kb = []
 data = pandas.read_csv(f'{pathlib.Path().resolve()}\csv\knowledge_base.csv', header=None)
 [kb.append(read_expr(row)) for row in data[0]]
 
-inputs = [
+test_kb = kb
+test_inputs = [
     read_expr('Superhero(Superman)'),
     read_expr('Supervillain(Thanos)'),
-    read_expr('Good(Superman)'),
-    read_expr('Bad(Thanos)'),
     read_expr('Extraterrestrial(Thor)'),
-    read_expr('Alien(Thor)')
+    read_expr('Human(Daredevil)'),
+    read_expr('Good(Superman)'),
+    read_expr('Evil(Thanos)'),
+    read_expr('Alien(Thor)'),
+    read_expr('Earthling(Daredevil)')
 ]
 
 # Check initial KB for contradictions
-for i in range(len(inputs)):
-    result = ResolutionProver().prove(inputs[i], kb)
-    if result == False:
+for i in range(len(test_inputs)):
+    result = ResolutionProver().prove(test_inputs[i], test_kb)
+    if result:
+        test_kb.append(test_inputs[i])
+    else:
         print(Fore.LIGHTRED_EX + '\nInternal contradiction found! Exiting system...')
         quit()
+print(kb)
 
 print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superheroes')
 print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter "prompts"!')
