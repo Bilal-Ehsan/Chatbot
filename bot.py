@@ -240,27 +240,27 @@ def main():
             params = answer[1:].split('$')
             cmd = int(params[0])
 
-            if cmd == 0:
+            if cmd == 1:
                 print(Fore.LIGHTMAGENTA_EX + params[1])
                 speak(params[1])
                 break
-            elif cmd == 1:
-                wikipedia_search(params)
             elif cmd == 2:
-                get_weather(params)
+                wikipedia_search(params)
             elif cmd == 3:
-                show_prompts()
+                get_weather(params)
             elif cmd == 4:
-                show_stats(params[1].strip())
+                show_prompts()
             elif cmd == 5:
-                show_image(params[1].strip())
+                show_stats(params[1].strip())
             elif cmd == 6:
-                show_image('random')
+                show_image(params[1].strip())
             elif cmd == 7:
-                add_to_kb(params[1].strip())
+                show_image('random')
             elif cmd == 8:
+                add_to_kb(params[1].strip())
+            elif cmd == 9:
                 check_kb(params[1].strip())
-            elif cmd == 99:
+            elif cmd == 0:
                 similarity_check(params[1].strip())
         else:
             print(Fore.LIGHTMAGENTA_EX + answer)

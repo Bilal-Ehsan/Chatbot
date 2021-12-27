@@ -4,7 +4,6 @@
 
 <category> 
   <pattern>HELLO</pattern>
-
   <template>
     <random>
       <li>Hello! How are you?</li>
@@ -52,15 +51,19 @@
 </category>
 
 <category>
-  <pattern>BYE</pattern>
+  <pattern>NOT BAD</pattern>
+  <template><srai>I AM FINE</srai></template>
+</category>
 
+<category>
+  <pattern>BYE</pattern>
   <template>
     <random>
-      <li>#0$I look forward to talking to you again <get name="username"/></li>
-      <li>#0$Bye! Nice talking to you <get name="username"/></li>
-      <li>#0$See you next time <get name="username"/></li>
-      <li>#0$Don't miss me too much <get name="username"/></li>
-      <li>#0$See ya <get name="username"/></li>
+      <li>#1$I look forward to talking to you again <get name="username"/></li>
+      <li>#1$Bye! Nice talking to you <get name="username"/></li>
+      <li>#1$See you next time <get name="username"/></li>
+      <li>#1$Don't miss me too much <get name="username"/></li>
+      <li>#1$See ya <get name="username"/></li>
     </random>
   </template>
 </category>
@@ -76,6 +79,11 @@
 </category>
 
 <category>
+  <pattern>SEE YA</pattern>
+  <template><srai>BYE</srai></template>
+</category>
+
+<category>
   <pattern>THANKS</pattern>
   <template>You're welcome</template>
 </category>
@@ -85,23 +93,11 @@
   <template><srai>THANKS</srai></template>
 </category>
 
-<!-- Weather API -->
-
-<category>
-  <pattern>WHAT IS THE WEATHER LIKE IN *</pattern>
-  <template>#2$ <star/></template>
-</category>
-
-<category>
-  <pattern>HOW IS THE WEATHER IN *</pattern>
-  <template><srai>WHAT IS THE WEATHER LIKE IN <star/></srai></template>
-</category>
-
 <!--- Wikipedia API -->
 
 <category>
   <pattern>WHAT IS A *</pattern>
-  <template>#1$ <star index="1"/></template>
+  <template>#2$ <star index="1"/></template>
 </category>
 
 <category>
@@ -124,6 +120,19 @@
   <template><srai>WHAT IS A <star/></srai></template>
 </category>
 
+<!-- Weather API -->
+
+<category>
+  <pattern>WHAT IS THE WEATHER LIKE IN *</pattern>
+  <template>#3$ <star/></template>
+</category>
+
+<category>
+  <pattern>HOW IS THE WEATHER IN *</pattern>
+  <template><srai>WHAT IS THE WEATHER LIKE IN <star/></srai></template>
+</category>
+
+
 <!-- Superheroes related talk -->
 
 <category>
@@ -138,22 +147,22 @@
 
 <category>
   <pattern>PROMPTS</pattern>
-  <template>#3$</template>
+  <template>#4$</template>
 </category>
 
 <category>
   <pattern>SHOW ME THE STATS OF *</pattern>
-  <template>#4$ <star index="1"/></template>
-</category>
-
-<category>
-  <pattern>SHOW ME A PICTURE OF *</pattern>
   <template>#5$ <star index="1"/></template>
 </category>
 
 <category>
+  <pattern>SHOW ME A PICTURE OF *</pattern>
+  <template>#6$ <star index="1"/></template>
+</category>
+
+<category>
   <pattern>SHOW ME A PICTURE OF A RANDOM SUPERHERO</pattern>
-  <template>#6$</template>
+  <template>#7$</template>
 </category>
 
 <category>
@@ -166,31 +175,43 @@
   <template>Superman, Batman, Wonder Woman, Aquaman, Flash and Cyborg</template>
 </category>
 
+<category>
+  <pattern>MY FAVOURITE SUPERHERO IS *</pattern>
+  <template>
+    That's awesome!<think><set name="fav-superhero"><star/></set></think>
+  </template>
+</category>
+
+<category>
+  <pattern>WHO IS MY FAVOURITE SUPERHERO</pattern>
+  <template>It's <get name="fav-superhero"/>! I didn't forget :)</template>
+</category>
+
 <!-- Logical reasoning -->
 
 <category>
   <pattern>I KNOW THAT * IS *</pattern>
-  <template>#7$ <star index="1"/> is <star index="2"/></template>
+  <template>#8$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>I KNOW THAT * IS A *</pattern>
-  <template>#7$ <star index="1"/> is <star index="2"/></template>
+  <template>#8$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS *</pattern>
-  <template>#8$ <star index="1"/> is <star index="2"/></template>
+  <template>#9$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS A *</pattern>
-  <template>#8$ <star index="1"/> is <star index="2"/></template>
+  <template>#9$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS NOT *</pattern>
-  <template>#8$ <star index="1"/> is not <star index="2"/></template>
+  <template>#9$ <star index="1"/> is not <star index="2"/></template>
 </category>
 
 <!-- General -->
@@ -222,7 +243,6 @@
 
 <category>
   <pattern>MY NAME IS *</pattern>
-
   <template>
     <random>
       <li>Nice name you got there<think><set name="username"><star/></set></think></li>
@@ -245,7 +265,7 @@
 <!-- Default reaction (no suitable match found) -->
 <category>
   <pattern>*</pattern>
-  <template>#99$ <star index="1"/></template>
+  <template>#0$ <star index="1"/></template>
 </category>
 
 </aiml>
