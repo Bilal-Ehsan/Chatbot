@@ -53,6 +53,11 @@ print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superhe
 print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter "prompts"!')
 
 
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
+
+
 def show_prompts():
     print(Fore.LIGHTCYAN_EX + '\nTry asking...\n')
     print('Show me the stats of [superhero]')
@@ -180,8 +185,7 @@ def similarity_check(query):
             raise Exception('Closest value too low')
 
         print(Fore.LIGHTMAGENTA_EX + data[closest_line_num][1]) # Answer
-        engine.say(data[closest_line_num][1])
-        engine.runAndWait()
+        speak(data[closest_line_num][1])
     except Exception:
         print(Fore.LIGHTRED_EX + 'I did not get that, please try again.')
 
@@ -196,12 +200,10 @@ def add_to_kb(q):
     if result:
         kb.append(expr)
         print(Fore.LIGHTMAGENTA_EX + 'Okay, I\'ll remember that!')
-        engine.say('Okay, I\'ll remember that!')
-        engine.runAndWait()
+        speak('Okay, I\'ll remember that!')
     else:
         print(Fore.LIGHTMAGENTA_EX + 'I don\'t know about that...')
-        engine.say('I don\'t know about that....')
-        engine.runAndWait()
+        speak('I don\'t know about that....')
 
 
 def check_kb(q):
@@ -210,12 +212,10 @@ def check_kb(q):
     result = ResolutionProver().prove(expr, kb)
     if result:
         print(Fore.LIGHTMAGENTA_EX + 'That\'s correct!')
-        engine.say('That\'s correct!')
-        engine.runAndWait()
+        speak('That\'s correct!')
     else:
         print(Fore.LIGHTMAGENTA_EX + 'That may not be true...')
-        engine.say('That may not be true...')
-        engine.runAndWait()
+        speak('That may not be true...')
 
 
 def main():
@@ -238,8 +238,7 @@ def main():
 
             if cmd == 0:
                 print(Fore.LIGHTMAGENTA_EX + params[1])
-                engine.say(params[1])
-                engine.runAndWait()
+                speak(params[1])
                 break
             elif cmd == 1:
                 wikipedia_search(params)
@@ -261,8 +260,7 @@ def main():
                 similarity_check(params[1].strip())
         else:
             print(Fore.LIGHTMAGENTA_EX + answer)
-            engine.say(answer)
-            engine.runAndWait()
+            speak(answer)
 
 
 if __name__ == '__main__':
