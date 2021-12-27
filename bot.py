@@ -33,16 +33,10 @@ kb = []
 data = pandas.read_csv(f'{pathlib.Path().resolve()}\csv\knowledge_base.csv', header=None)
 [kb.append(read_expr(row)) for row in data[0]]
 
-test_kb = kb
+test_kb = kb.copy()
 test_inputs = [
     read_expr('Superhero(Superman)'),
-    read_expr('Supervillain(Thanos)'),
-    read_expr('Extraterrestrial(Thor)'),
-    read_expr('Human(Daredevil)'),
-    read_expr('Good(Superman)'),
-    read_expr('Evil(Thanos)'),
-    read_expr('Alien(Thor)'),
-    read_expr('Earthling(Daredevil)')
+    read_expr('-Evil(Superman)')
 ]
 
 # Check initial KB for contradictions
@@ -55,7 +49,7 @@ for i in range(len(test_inputs)):
         quit()
 
 print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superheroes')
-print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter "prompts"!')
+print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter \'prompts\'!')
 
 
 def speak(text):
@@ -189,7 +183,7 @@ def similarity_check(query):
         if closest < 0.7:
             raise Exception('Closest value too low')
 
-        print(Fore.LIGHTMAGENTA_EX + data[closest_line_num][1]) # Answer
+        print(Fore.LIGHTMAGENTA_EX + data[closest_line_num][1])  # Answer
         speak(data[closest_line_num][1])
     except Exception:
         print(Fore.LIGHTRED_EX + 'I did not get that, please try again.')
@@ -200,6 +194,7 @@ def add_to_kb(q):
     expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
     if expr in kb:
         print(Fore.LIGHTMAGENTA_EX + 'I already knew that!')
+        speak('I already knew that!')
         return
     result = ResolutionProver().prove(expr, kb)
     if result:
@@ -207,20 +202,24 @@ def add_to_kb(q):
         print(Fore.LIGHTMAGENTA_EX + 'Okay, I\'ll remember that!')
         speak('Okay, I\'ll remember that!')
     else:
-        print(Fore.LIGHTMAGENTA_EX + 'I don\'t know about that...')
-        speak('I don\'t know about that....')
+        print(Fore.LIGHTMAGENTA_EX + 'Sorry, that contradicts with what I know!')
+        speak('Sorry, that contradicts with what I know!')
 
 
 def check_kb(q):
-    object, subject = q.split(' is ')
-    expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')  # KB syntax-specific
+    if 'not' in q:
+        object, subject = q.split(' is not ')
+        expr = read_expr(f'-{subject.capitalize()}({object.capitalize()})')
+    else:
+        object, subject = q.split(' is ')
+        expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
     result = ResolutionProver().prove(expr, kb)
     if result:
         print(Fore.LIGHTMAGENTA_EX + 'That\'s correct!')
         speak('That\'s correct!')
     else:
-        print(Fore.LIGHTMAGENTA_EX + 'That may not be true...')
-        speak('That may not be true...')
+        print(Fore.LIGHTMAGENTA_EX + 'That\'s incorrect...')
+        speak('That\'s incorrect...')
 
 
 def main():
