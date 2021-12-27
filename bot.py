@@ -53,7 +53,6 @@ for i in range(len(test_inputs)):
     else:
         print(Fore.LIGHTRED_EX + '\nInternal contradiction found! Exiting system...')
         quit()
-print(kb)
 
 print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superheroes')
 print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter "prompts"!')
