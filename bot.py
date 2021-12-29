@@ -35,14 +35,8 @@ data = pandas.read_csv(f'{pathlib.Path().resolve()}\csv\knowledge_base.csv', hea
 
 test_kb = kb.copy()
 test_inputs = [
-    read_expr('Superhero(Superman)'),
-    read_expr('-Evil(Superman)'),
-    read_expr('Extraterrestrial(Thor)'),
-    read_expr('-Human(Thor)'),
-    read_expr('Solo(Punisher)'),
-    read_expr('-Team(Punisher)'),
-    read_expr('-Superhero(Darkseid)'),
-    read_expr('Threat(Darkseid)')
+    read_expr('Superhero(Flash)'),
+    read_expr('-Evil(Flash)'),
 ]
 
 # Check initial KB for contradictions
@@ -228,8 +222,8 @@ def check_kb(q):
         print(Fore.LIGHTMAGENTA_EX + 'That\'s correct!')
         speak('That\'s correct!')
     else:
-        print(Fore.LIGHTMAGENTA_EX + 'That\'s incorrect...')
-        speak('That\'s incorrect...')
+        print(Fore.LIGHTMAGENTA_EX + 'I\'m not sure about that...')
+        speak('I\'m not sure about that...')
 
 
 def main():
