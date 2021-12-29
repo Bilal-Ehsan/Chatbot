@@ -36,7 +36,13 @@ data = pandas.read_csv(f'{pathlib.Path().resolve()}\csv\knowledge_base.csv', hea
 test_kb = kb.copy()
 test_inputs = [
     read_expr('Superhero(Superman)'),
-    read_expr('-Evil(Superman)')
+    read_expr('-Evil(Superman)'),
+    read_expr('Extraterrestrial(Thor)'),
+    read_expr('-Human(Thor)'),
+    read_expr('Solo(Punisher)'),
+    read_expr('-Team(Punisher)'),
+    read_expr('-Superhero(Darkseid)'),
+    read_expr('Threat(Darkseid)')
 ]
 
 # Check initial KB for contradictions
@@ -190,8 +196,12 @@ def similarity_check(query):
 
 
 def add_to_kb(q):
-    object, subject = q.split(' is ')
-    expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
+    if 'not' in q:
+        object, subject = q.split(' is not ')
+        expr = read_expr(f'-{subject.capitalize()}({object.capitalize()})')
+    else:
+        object, subject = q.split(' is ')
+        expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
     if expr in kb:
         print(Fore.LIGHTMAGENTA_EX + 'I already knew that!')
         speak('I already knew that!')

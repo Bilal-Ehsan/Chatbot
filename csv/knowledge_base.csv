@@ -1,2 +1,11 @@
-Superhero(a)
-Superhero(a) -> -Evil(a)
+Superhero(x)
+Superhero(x) -> Good
+Evil(x) -> -Superhero(x)
+Extraterrestrial(x)
+Human(x) -> -Extraterrestrial(x)
+Solo(x)
+Team(x) -> -Solo(x)
+-Superhero(x)
+-Superhero(x) -> Threat(x)
+Superhero(Superman)
+-Superhero(Darkseid)
