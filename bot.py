@@ -37,6 +37,9 @@ test_kb = kb.copy()
 test_inputs = [
     read_expr('Superhero(Flash)'),
     read_expr('-Evil(Flash)'),
+    read_expr('Extraterrestrial(Groot)'),
+    read_expr('-Human(Groot)'),
+    read_expr('Marvel(Tony)')
 ]
 
 # Check initial KB for contradictions
@@ -211,12 +214,8 @@ def add_to_kb(q):
 
 
 def check_kb(q):
-    if 'not' in q:
-        object, subject = q.split(' is not ')
-        expr = read_expr(f'-{subject.capitalize()}({object.capitalize()})')
-    else:
-        object, subject = q.split(' is ')
-        expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
+    object, subject = q.split(' is ')
+    expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
     result = ResolutionProver().prove(expr, kb)
     if result:
         print(Fore.LIGHTMAGENTA_EX + 'That\'s correct!')
