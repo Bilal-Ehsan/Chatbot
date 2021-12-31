@@ -39,10 +39,10 @@ test_inputs = [
     read_expr('-Evil(Flash)'),
     read_expr('Extraterrestrial(Groot)'),
     read_expr('-Human(Groot)'),
-    read_expr('Marvel(Tony)')
+    read_expr('Avenger(Tony)')
 ]
 
-# Check initial KB for contradictions
+# KB integrity check
 for i in range(len(test_inputs)):
     result = ResolutionProver().prove(test_inputs[i], test_kb)
     if result:
@@ -183,7 +183,7 @@ def similarity_check(query):
 
         closest = max(sims[query_doc_tf_idf].tolist())
         closest_line_num = sims[query_doc_tf_idf].tolist().index(closest)
-        if closest < 0.7:
+        if closest < 0.6:
             raise Exception('Closest value too low')
 
         print(Fore.LIGHTMAGENTA_EX + data[closest_line_num][1])  # Answer
@@ -199,10 +199,12 @@ def add_to_kb(q):
     else:
         object, subject = q.split(' is ')
         expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
+
     if expr in kb:
         print(Fore.LIGHTMAGENTA_EX + 'I already knew that!')
         speak('I already knew that!')
         return
+
     result = ResolutionProver().prove(expr, kb)
     if result:
         kb.append(expr)
@@ -221,8 +223,14 @@ def check_kb(q):
         print(Fore.LIGHTMAGENTA_EX + 'That\'s correct!')
         speak('That\'s correct!')
     else:
-        print(Fore.LIGHTMAGENTA_EX + 'I\'m not sure about that...')
-        speak('I\'m not sure about that...')
+        print('I\'m not sure about that... Let me check...')
+
+        if subject == 'Avenger' or subject == 'avenger':
+            fact_to_check = f'Marvel({object.capitalize()})'
+            is_in_kb = fact_to_check in kb
+            if not is_in_kb:
+                print(Fore.LIGHTMAGENTA_EX + 'Sorry, I don\'t know')
+                speak('Sorry, I don\'t know')
 
 
 def main():
