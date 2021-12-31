@@ -219,7 +219,6 @@
   <template>#8$ <star index="1"/> is not <star index="2"/></template>
 </category>
 
-
 <category>
   <pattern>CHECK THAT * IS *</pattern>
   <template>#9$ <star index="1"/> is <star index="2"/></template>
@@ -233,6 +232,21 @@
 <category>
   <pattern>CHECK THAT * IS AN *</pattern>
   <template>#9$ <star index="1"/> is <star index="2"/></template>
+</category>
+
+<category>
+  <pattern>CHECK THAT * IS NOT *</pattern>
+  <template>#9$ <star index="1"/> is not <star index="2"/></template>
+</category>
+
+<category>
+  <pattern>CHECK THAT * IS A NOT *</pattern>
+  <template>#9$ <star index="1"/> is not <star index="2"/></template>
+</category>
+
+<category>
+  <pattern>CHECK THAT * IS AN NOT *</pattern>
+  <template>#9$ <star index="1"/> is not <star index="2"/></template>
 </category>
 
 <!-- General -->

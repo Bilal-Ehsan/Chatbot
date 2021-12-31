@@ -35,11 +35,14 @@ data = pandas.read_csv(f'{pathlib.Path().resolve()}\csv\knowledge_base.csv', hea
 
 test_kb = kb.copy()
 test_inputs = [
-    read_expr('Superhero(Flash)'),
-    read_expr('-Evil(Flash)'),
-    read_expr('Extraterrestrial(Groot)'),
+    read_expr('-Evil(Superman)'),
     read_expr('-Human(Groot)'),
-    read_expr('Avenger(Tony)')
+    read_expr('Avenger(Tony)'),
+    read_expr('Avenger(Steve)'),
+    read_expr('Avenger(Natasha)'),
+    read_expr('Avenger(Bruce)'),
+    read_expr('Avenger(Thor)'),
+    read_expr('Avenger(Clint)')
 ]
 
 # KB integrity check
@@ -216,8 +219,13 @@ def add_to_kb(q):
 
 
 def check_kb(q):
-    object, subject = q.split(' is ')
-    expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
+    if 'not' in q:
+        object, subject = q.split(' is not ')
+        expr = read_expr(f'-{subject.capitalize()}({object.capitalize()})')
+    else:
+        object, subject = q.split(' is ')
+        expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
+
     result = ResolutionProver().prove(expr, kb)
     if result:
         print(Fore.LIGHTMAGENTA_EX + 'That\'s correct!')
@@ -231,6 +239,9 @@ def check_kb(q):
             if not is_in_kb:
                 print(Fore.LIGHTMAGENTA_EX + 'Sorry, I don\'t know')
                 speak('Sorry, I don\'t know')
+        elif object == 'Sun' or subject == 'sun':
+            print(Fore.LIGHTMAGENTA_EX + 'Incorrect')
+            speak('Incorrect')
 
 
 def main():
