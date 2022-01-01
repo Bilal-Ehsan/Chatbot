@@ -218,6 +218,12 @@ def add_to_kb(q):
         speak('Sorry, that contradicts with what I know!')
 
 
+def fact_check(fact):
+    if fact in kb:
+        print(Fore.LIGHTMAGENTA_EX + 'Incorrect')
+        speak('Incorrect')
+
+
 def check_kb(q):
     if 'not' in q:
         object, subject = q.split(' is not ')
@@ -234,17 +240,13 @@ def check_kb(q):
         print('I\'m not sure about that... Let me check...')
 
         if 'is evil' in q:
-            fact_to_check = f'Superhero({object.capitalize()})'
-            if fact_to_check not in kb:
-                print(Fore.LIGHTMAGENTA_EX + 'Incorrect')
-                speak('Incorrect')
+            fact_to_check = read_expr(f'Superhero({object.capitalize()})')
+            fact_check(fact_to_check)
         elif 'is human' in q:
-            fact_to_check = f'Alien({object.capitalize()})'
-            if fact_to_check not in kb:
-                print(Fore.LIGHTMAGENTA_EX + 'Incorrect')
-                speak('Incorrect')
+            fact_to_check = read_expr(f'Alien({object.capitalize()})')
+            fact_check(fact_to_check)
         elif subject == 'Avenger' or subject == 'avenger':
-            fact_to_check = f'Marvel({object.capitalize()})'
+            fact_to_check = read_expr(f'Marvel({object.capitalize()})')
             if fact_to_check not in kb:
                 print(Fore.LIGHTMAGENTA_EX + 'Sorry, I don\'t know')
                 speak('Sorry, I don\'t know')
