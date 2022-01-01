@@ -233,13 +233,22 @@ def check_kb(q):
     else:
         print('I\'m not sure about that... Let me check...')
 
-        if subject == 'Avenger' or subject == 'avenger':
+        if 'is evil' in q:
+            fact_to_check = f'Superhero({object.capitalize()})'
+            if fact_to_check not in kb:
+                print(Fore.LIGHTMAGENTA_EX + 'Incorrect')
+                speak('Incorrect')
+        elif 'is human' in q:
+            fact_to_check = f'Alien({object.capitalize()})'
+            if fact_to_check not in kb:
+                print(Fore.LIGHTMAGENTA_EX + 'Incorrect')
+                speak('Incorrect')
+        elif subject == 'Avenger' or subject == 'avenger':
             fact_to_check = f'Marvel({object.capitalize()})'
-            is_in_kb = fact_to_check in kb
-            if not is_in_kb:
+            if fact_to_check not in kb:
                 print(Fore.LIGHTMAGENTA_EX + 'Sorry, I don\'t know')
                 speak('Sorry, I don\'t know')
-        elif object == 'Sun' or subject == 'sun':
+        elif object == 'Kryptonite' or object == 'kryptonite':
             print(Fore.LIGHTMAGENTA_EX + 'Incorrect')
             speak('Incorrect')
 

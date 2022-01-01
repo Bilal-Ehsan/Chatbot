@@ -1,8 +1,13 @@
-Star(Sun)
+Mineral(Kryptonite)
+
 Superhero(x) -> -Evil(x)
 Superhero(Superman)
-Extraterrestrial(x) -> -Human(x)
-Extraterrestrial(Groot)
+Superhero(x)
+
+Alien(x) -> -Human(x)
+Alien(Groot)
+Alien(x)
+
 Marvel(x) -> Avenger(x)
 Marvel(Tony) 
 Marvel(Steve)
