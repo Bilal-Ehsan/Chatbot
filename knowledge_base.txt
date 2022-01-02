@@ -17,6 +17,8 @@ Marvel(Thor)
 Marvel(Clint)
 
 Enemies(Superman, Zod)
+Enemies(Batman, Joker)
+Enemies(Thor, Loki)
 Enemies(x, y) & Supervillain(y) -> Enemies(y, x)
 Supervillain(Zod)
 Enemies(x, y)
