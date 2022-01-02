@@ -13,7 +13,6 @@ import pathlib
 import csv
 from nltk.tokenize import sent_tokenize, word_tokenize
 import gensim
-import pandas
 from nltk.sem import Expression
 from nltk.inference import ResolutionProver
 
@@ -30,8 +29,11 @@ kern.setTextEncoding(None)
 kern.bootstrap(learnFiles='patterns.xml')
 
 kb = []
-data = pandas.read_csv(f'{pathlib.Path().resolve()}\csv\knowledge_base.csv', header=None)
-[kb.append(read_expr(row)) for row in data[0]]
+with open('knowledge_base.txt', 'r') as f:
+    for line in f:
+        stripped = line.strip()
+        if stripped:
+            kb.append(read_expr(stripped))
 
 test_kb = kb.copy()
 test_inputs = [

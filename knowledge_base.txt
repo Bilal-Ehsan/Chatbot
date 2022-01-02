@@ -15,3 +15,5 @@ Marvel(Natasha)
 Marvel(Bruce)
 Marvel(Thor)
 Marvel(Clint)
+
+Enemies(Superman, Zod)
