@@ -205,18 +205,8 @@
 </category>
 
 <category>
-  <pattern>I KNOW THAT * IS NOT *</pattern>
-  <template>#8$ <star index="1"/> is not <star index="2"/></template>
-</category>
-
-<category>
-  <pattern>I KNOW THAT * IS NOT A *</pattern>
-  <template>#8$ <star index="1"/> is not <star index="2"/></template>
-</category>
-
-<category>
-  <pattern>I KNOW THAT * IS NOT AN *</pattern>
-  <template>#8$ <star index="1"/> is not <star index="2"/></template>
+  <pattern>I KNOW THAT * AND * ARE ENEMIES</pattern>
+  <template>#8$ <star index="1"/> and <star index="2"/></template>
 </category>
 
 <category>
@@ -247,6 +237,11 @@
 <category>
   <pattern>CHECK THAT * IS AN NOT *</pattern>
   <template>#9$ <star index="1"/> is not <star index="2"/></template>
+</category>
+
+<category>
+  <pattern>CHECK THAT * AND * ARE ENEMIES</pattern>
+  <template>#9$ <star index="1"/> and <star index="2"/></template>
 </category>
 
 <!-- General -->
