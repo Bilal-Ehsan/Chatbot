@@ -2,8 +2,6 @@ import aiml
 import colorama
 from colorama import Fore
 from dotenv import load_dotenv
-from nltk.sem import Expression
-from nltk.inference import ResolutionProver
 import pyttsx3
 from simpful import *
 
@@ -21,10 +19,6 @@ colorama.init(autoreset=True)
 kern = aiml.Kernel()
 kern.setTextEncoding(None)
 
-with open('fuzzy_rules.txt') as f:
-    rules = [rule.rstrip() for rule in f]
-fuzzy.FS.add_rules(rules)
-
 
 def speak(text):
     engine.say(text)
@@ -37,33 +31,6 @@ def show_prompts():
     print('Show me a picture of [superhero]')
     print('Show me a picture of a random superhero')
     print('Character threat calculator\n')
-
-
-def character_threat_calculator():
-    character = input('Who is your character? ')
-    service = input('From 0-10, how strong is your character? ')
-    food = input('From 0-10, how fast is your character? ')
-
-    fuzzy.FS.set_variable('Strength', int(service))
-    fuzzy.FS.set_variable('Speed', int(food))
-    result = fuzzy.FS.Mamdani_inference(['Threat'])
-
-    threat = result.get('Threat')
-    if threat > 10 and threat < 12:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is not a threat at all...')
-        speak(f'{character} is not a threat at all...')
-    elif threat >= 12 and threat < 14:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is somewhat of a threat.')
-        speak(f'{character} is somewhat of a threat.')
-    elif threat >= 14 and threat < 16:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is definitely a threat!')
-        speak(f'{character} is definitely a threat!')
-    elif threat >= 16 and threat < 18:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is a super threat!!')
-        speak(f'{character} is a super threat!!')
-    else:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is a god-level threat!!!')
-        speak(f'{character} is a god-level threat!!!')
 
 
 def main():
@@ -107,7 +74,7 @@ def main():
             elif cmd == 7:
                 web_services.show_image('random')
             elif cmd == 8:
-                character_threat_calculator()
+                fuzzy.character_threat_calculator()
             elif cmd == 9:
                 logic.add_to_kb(params[1].strip())
             elif cmd == 10:
