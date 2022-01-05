@@ -1,1 +1,3 @@
-
+IF (Strength IS weak) OR (Speed IS slow) THEN (Threat IS low)
+IF (Strength IS average) THEN (Threat IS average)
+IF (Strength IS high) OR (Speed IS rapid) THEN (Threat IS high)

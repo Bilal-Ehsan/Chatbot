@@ -187,61 +187,66 @@
   <template>It's <get name="fav-superhero"/>! I didn't forget :)</template>
 </category>
 
+<category>
+  <pattern>CHARACTER THREAT CALCULATOR</pattern>
+  <template>#8$</template>
+</category>
+
 <!-- Logical reasoning -->
 
 <category>
   <pattern>I KNOW THAT * IS *</pattern>
-  <template>#8$ <star index="1"/> is <star index="2"/></template>
+  <template>#9$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>I KNOW THAT * IS A *</pattern>
-  <template>#8$ <star index="1"/> is <star index="2"/></template>
+  <template>#9$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>I KNOW THAT * IS AN *</pattern>
-  <template>#8$ <star index="1"/> is <star index="2"/></template>
+  <template>#9$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>I KNOW THAT * AND * ARE ENEMIES</pattern>
-  <template>#8$ <star index="1"/> and <star index="2"/></template>
+  <template>#9$ <star index="1"/> and <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS *</pattern>
-  <template>#9$ <star index="1"/> is <star index="2"/></template>
+  <template>#10$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS A *</pattern>
-  <template>#9$ <star index="1"/> is <star index="2"/></template>
+  <template>#10$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS AN *</pattern>
-  <template>#9$ <star index="1"/> is <star index="2"/></template>
+  <template>#10$ <star index="1"/> is <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS NOT *</pattern>
-  <template>#9$ <star index="1"/> is not <star index="2"/></template>
+  <template>#10$ <star index="1"/> is not <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS A NOT *</pattern>
-  <template>#9$ <star index="1"/> is not <star index="2"/></template>
+  <template>#10$ <star index="1"/> is not <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * IS AN NOT *</pattern>
-  <template>#9$ <star index="1"/> is not <star index="2"/></template>
+  <template>#10$ <star index="1"/> is not <star index="2"/></template>
 </category>
 
 <category>
   <pattern>CHECK THAT * AND * ARE ENEMIES</pattern>
-  <template>#9$ <star index="1"/> and <star index="2"/></template>
+  <template>#10$ <star index="1"/> and <star index="2"/></template>
 </category>
 
 <!-- General -->
