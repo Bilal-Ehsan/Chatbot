@@ -1,20 +1,23 @@
-import wikipedia
+import csv
 import json
 import requests
+import os
+import pathlib
+import random
+import webbrowser
+
 import aiml
 import colorama
 from colorama import Fore
-import pyttsx3
-import webbrowser
 from dotenv import load_dotenv
-import os
-import random
-import pathlib
-import csv
-from nltk.tokenize import sent_tokenize, word_tokenize
 import gensim
+from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.sem import Expression
 from nltk.inference import ResolutionProver
+import pyttsx3
+import wikipedia
+
+import fuzzy
 
 
 # Initialisations
