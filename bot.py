@@ -1,8 +1,6 @@
-import csv
 import json
 import requests
 import os
-import pathlib
 import random
 import webbrowser
 
@@ -10,18 +8,16 @@ import aiml
 import colorama
 from colorama import Fore
 from dotenv import load_dotenv
-import gensim
-from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.sem import Expression
 from nltk.inference import ResolutionProver
 import pyttsx3
 from simpful import *
 import wikipedia
 
+import similarity
 import fuzzy
 
 
-# Initialisations
 load_dotenv()
 engine = pyttsx3.init()
 colorama.init(autoreset=True)
@@ -30,7 +26,6 @@ read_expr = Expression.fromstring
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
 kern.setTextEncoding(None)
-kern.bootstrap(learnFiles='patterns.xml')
 
 kb = []
 with open('knowledge_base.txt', 'r') as f:
@@ -39,34 +34,32 @@ with open('knowledge_base.txt', 'r') as f:
         if stripped:
             kb.append(read_expr(stripped))
 
-test_kb = kb.copy()
-test_inputs = [
-    read_expr('-Evil(Superman)'),
-    read_expr('-Human(Groot)'),
-    read_expr('Avenger(Tony)'),
-    read_expr('Avenger(Steve)'),
-    read_expr('Avenger(Natasha)'),
-    read_expr('Avenger(Bruce)'),
-    read_expr('Avenger(Thor)'),
-    read_expr('Avenger(Clint)'),
-    read_expr('Enemies(Zod, Superman)')
-]
-
-# KB integrity check
-for i in range(len(test_inputs)):
-    result = ResolutionProver().prove(test_inputs[i], test_kb)
-    if result:
-        test_kb.append(test_inputs[i])
-    else:
-        print(Fore.LIGHTRED_EX + '\nInternal contradiction found! Exiting system...')
-        quit()
-
 with open('fuzzy_rules.txt') as f:
     rules = [rule.rstrip() for rule in f]
 fuzzy.FS.add_rules(rules)
 
-print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superheroes')
-print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter \'prompts\'!')
+
+def integrity_check():
+    test_kb = kb.copy()
+    test_inputs = [
+        read_expr('-Evil(Superman)'),
+        read_expr('-Human(Groot)'),
+        read_expr('Avenger(Tony)'),
+        read_expr('Avenger(Steve)'),
+        read_expr('Avenger(Natasha)'),
+        read_expr('Avenger(Bruce)'),
+        read_expr('Avenger(Thor)'),
+        read_expr('Avenger(Clint)'),
+        read_expr('Enemies(Zod, Superman)')
+    ]
+
+    for i in range(len(test_inputs)):
+        result = ResolutionProver().prove(test_inputs[i], test_kb)
+        if result:
+            test_kb.append(test_inputs[i])
+        else:
+            print(Fore.LIGHTRED_EX + '\nInternal contradiction found! Exiting system...')
+            quit()
 
 
 def speak(text):
@@ -153,58 +146,6 @@ def show_image(superhero):
             webbrowser.open(image)
     except:
         print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find a picture of {superhero}!')
-
-
-def similarity_check(query):
-    try:
-        path_to_csv = f'{pathlib.Path().resolve()}\csv\qa_pairs.csv'
-        file = open(path_to_csv, newline='')
-        reader = csv.reader(file)
-
-        data = []
-        for row in reader:
-            question = row[0]
-            answer = row[1]
-            data.append([question, answer])
-
-        tokenised_sentences = []
-        for i in range(len(data)):
-            tokens = sent_tokenize(data[i][0])
-            for line in tokens:
-                tokenised_sentences.append(line)
-
-        # Tokenise each word in each sentence
-        tokenised_words = [[w.lower() for w in word_tokenize(word)] 
-                    for word in tokenised_sentences]
-        dictionary = gensim.corpora.Dictionary(tokenised_words)  # Maps every word to a number
-        corpus = [dictionary.doc2bow(gen_doc) for gen_doc in tokenised_words]  # Bag of words
-
-        tf_idf = gensim.models.TfidfModel(corpus)
-
-        # Building the index
-        sims = gensim.similarities.Similarity('workdir/', tf_idf[corpus],
-            num_features=len(dictionary))
-
-        tokenised_query = []
-        tokenised_query.append(query)
-
-        for line in tokenised_query:
-            query_doc = [w.lower() for w in word_tokenize(line)]
-            # Update existing dictionary and create a bag of words
-            query_doc_bow = dictionary.doc2bow(query_doc)
-
-        # Perform a similarity query against the corpus
-        query_doc_tf_idf = tf_idf[query_doc_bow]
-
-        closest = max(sims[query_doc_tf_idf].tolist())
-        closest_line_num = sims[query_doc_tf_idf].tolist().index(closest)
-        if closest < 0.6:
-            raise Exception('Closest value too low')
-
-        print(Fore.LIGHTMAGENTA_EX + data[closest_line_num][1])  # Answer
-        speak(data[closest_line_num][1])
-    except Exception:
-        print(Fore.LIGHTRED_EX + 'I did not get that, please try again.')
 
 
 def add_to_kb(q):
@@ -320,6 +261,12 @@ def character_threat_calculator():
 
 
 def main():
+    integrity_check()
+    kern.bootstrap(learnFiles='patterns.xml')
+
+    print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superheroes')
+    print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter \'prompts\'!')
+
     while True:
         try:
             user_input = input('> ')
@@ -360,7 +307,7 @@ def main():
             elif cmd == 10:
                 check_kb(params[1].strip())
             elif cmd == 0:
-                similarity_check(params[1].strip())
+                similarity.similarity_check(params[1].strip())
         else:
             print(Fore.LIGHTMAGENTA_EX + answer)
             speak(answer)
