@@ -6,6 +6,7 @@ import pyttsx3
 from simpful import *
 
 import fuzzy
+import logic
 import similarity
 import web_services
 
@@ -13,34 +14,10 @@ import web_services
 load_dotenv()
 engine = pyttsx3.init()
 colorama.init(autoreset=True)
-read_expr = Expression.fromstring
 
 # The Kernel object is the public interface to the AIML interpreter
 kern = aiml.Kernel()
 kern.setTextEncoding(None)
-
-
-def integrity_check():
-    test_kb = kb.copy()
-    test_inputs = [
-        read_expr('-Evil(Superman)'),
-        read_expr('-Human(Groot)'),
-        read_expr('Avenger(Tony)'),
-        read_expr('Avenger(Steve)'),
-        read_expr('Avenger(Natasha)'),
-        read_expr('Avenger(Bruce)'),
-        read_expr('Avenger(Thor)'),
-        read_expr('Avenger(Clint)'),
-        read_expr('Enemies(Zod, Superman)')
-    ]
-
-    for i in range(len(test_inputs)):
-        result = ResolutionProver().prove(test_inputs[i], test_kb)
-        if result:
-            test_kb.append(test_inputs[i])
-        else:
-            print(Fore.LIGHTRED_EX + '\nInternal contradiction found! Exiting system...')
-            quit()
 
 
 def speak(text):
@@ -57,7 +34,7 @@ def show_prompts():
 
 
 def main():
-    integrity_check()
+    logic.integrity_check()
     kern.bootstrap(learnFiles='patterns.xml')
 
     print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superheroes')
@@ -99,9 +76,9 @@ def main():
             elif cmd == 8:
                 fuzzy.character_threat_calculator()
             elif cmd == 9:
-                add_to_kb(params[1].strip())
+                logic.add_to_kb(params[1].strip())
             elif cmd == 10:
-                check_kb(params[1].strip())
+                logic.check_kb(params[1].strip())
             elif cmd == 0:
                 similarity.similarity_check(params[1].strip())
         else:
