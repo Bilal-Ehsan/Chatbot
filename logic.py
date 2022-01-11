@@ -90,6 +90,7 @@ def check_kb(q):
         object_1, object_2 = q.split(' and ')
         expr = read_expr(f'Enemies({object_1.capitalize()}, {object_2.capitalize()})')
         second_expr = read_expr(f'Enemies({object_2.capitalize()}, {object_1.capitalize()})')
+        
         in_kb = (not is_multi_valued_in_kb(expr)) and (not is_multi_valued_in_kb(second_expr))
         if in_kb:
             print(Fore.LIGHTMAGENTA_EX + 'There\'s nothing about this in my knowledge base!')
