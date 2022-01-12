@@ -5,9 +5,6 @@ from nltk.inference import ResolutionProver
 import bot
 
 
-# This logic was working... now it does not...
-# When ever the result of ResolutionProver isn't True, nothing happens...
-
 read_expr = Expression.fromstring
 
 kb = []
@@ -28,8 +25,7 @@ def integrity_check():
         read_expr('Avenger(Natasha)'),
         read_expr('Avenger(Bruce)'),
         read_expr('Avenger(Thor)'),
-        read_expr('Avenger(Clint)'),
-        read_expr('Enemies(Zod, Superman)')
+        read_expr('Avenger(Clint)')
     ]
 
     for i in range(len(test_inputs)):
@@ -70,39 +66,13 @@ def fact_check(fact):
         bot.speak('Incorrect')
 
 
-def is_in_kb(expr):
-    if expr not in kb:
-        print(Fore.LIGHTMAGENTA_EX + 'There\'s nothing about this in my knowledge base!')
-        bot.speak('There\'s nothing about this in my knowledge base!')
-        return False
-    return True
-
-
-def is_multi_valued_in_kb(expr):
-    if expr not in kb:
-        return False
-    return True
-
-
 def check_kb(q):
     if 'not' in q:
         object, subject = q.split(' is not ')
         expr = read_expr(f'-{subject.capitalize()}({object.capitalize()})')
-        if not is_in_kb(expr): return
-    elif 'and' in q:
-        object_1, object_2 = q.split(' and ')
-        expr = read_expr(f'Enemies({object_1.capitalize()}, {object_2.capitalize()})')
-        second_expr = read_expr(f'Enemies({object_2.capitalize()}, {object_1.capitalize()})')
-        
-        in_kb = (not is_multi_valued_in_kb(expr)) and (not is_multi_valued_in_kb(second_expr))
-        if in_kb:
-            print(Fore.LIGHTMAGENTA_EX + 'There\'s nothing about this in my knowledge base!')
-            bot.speak('There\'s nothing about this in my knowledge base!')
-            return
     else:
         object, subject = q.split(' is ')
         expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
-        if not is_in_kb(expr): return
 
     result = ResolutionProver().prove(expr, kb)
     if result:
