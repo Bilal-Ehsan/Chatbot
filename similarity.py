@@ -5,7 +5,7 @@ from colorama import Fore
 import gensim
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-from bot import speak
+import bot
 
 
 def similarity_check(query):
@@ -55,6 +55,6 @@ def similarity_check(query):
             raise Exception('Closest value too low')
 
         print(Fore.LIGHTMAGENTA_EX + data[closest_line_num][1])  # Answer
-        speak(data[closest_line_num][1])
+        bot.speak(data[closest_line_num][1])
     except Exception:
         print(Fore.LIGHTRED_EX + 'I did not get that, please try again.')
