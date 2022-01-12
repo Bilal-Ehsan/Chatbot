@@ -4,6 +4,8 @@ from nltk.inference import ResolutionProver
 
 import bot
 
+# This logic was working... now it does not...
+# When ever the result of ResolutionProver isn't True, nothing happens...
 
 read_expr = Expression.fromstring
 
