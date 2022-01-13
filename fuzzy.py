@@ -26,7 +26,7 @@ FS.add_linguistic_variable('Threat', LinguisticVariable([T_1, T_2, T_3], univers
 
 
 def character_threat_calculator():
-    character = input('Who is your character? ')
+    character = input('\nWho is your character? ')
     service = input('From 0-10, how strong is your character? ')
     food = input('From 0-10, how fast is your character? ')
 
@@ -36,17 +36,17 @@ def character_threat_calculator():
 
     threat = result.get('Threat')
     if threat > 10 and threat < 12:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is not a threat at all...')
+        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is not a threat at all...\n')
         bot.speak(f'{character} is not a threat at all...')
     elif threat >= 12 and threat < 14:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is somewhat of a threat.')
+        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is somewhat of a threat.\n')
         bot.speak(f'{character} is somewhat of a threat.')
     elif threat >= 14 and threat < 16:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is definitely a threat!')
+        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is definitely a threat!\n')
         bot.speak(f'{character} is definitely a threat!')
     elif threat >= 16 and threat < 18:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is a super threat!!')
+        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is a super threat!!\n')
         bot.speak(f'{character} is a super threat!!')
     else:
-        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is a god-level threat!!!')
+        print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is a god-level threat!!!\n')
         bot.speak(f'{character} is a god-level threat!!!')

@@ -47,7 +47,7 @@ def show_stats(superhero):
             power_stats = response_json['results'][0]['powerstats']
             biography = response_json['results'][0]['appearance']
             work = response_json['results'][0]['work']
-            print(f'{Fore.LIGHTCYAN_EX}-> {superhero} related info:\n')
+            print(f'\n{Fore.LIGHTCYAN_EX}{superhero} related info:\n')
 
             for x, y in power_stats.items():
                 print(f'{x.capitalize()} - {y}')
@@ -57,6 +57,7 @@ def show_stats(superhero):
             print()
             for x, y in work.items():
                 print(f'{x.capitalize()} - {y}')
+            print()
     except:
         print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find the stats of {superhero}!')
 
