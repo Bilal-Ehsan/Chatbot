@@ -3,7 +3,6 @@ import colorama
 from colorama import Fore
 from dotenv import load_dotenv
 import pyttsx3
-from simpful import *
 
 import fuzzy
 import logic

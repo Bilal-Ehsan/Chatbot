@@ -35,7 +35,7 @@ def character_threat_calculator():
     result = FS.Mamdani_inference(['Threat'])
 
     threat = result.get('Threat')
-    if threat > 10 and threat < 12:
+    if threat >= 0 and threat < 12:
         print(f'\n{Fore.LIGHTMAGENTA_EX}{character} is not a threat at all...\n')
         bot.speak(f'{character} is not a threat at all...')
     elif threat >= 12 and threat < 14:
