@@ -38,12 +38,8 @@ def integrity_check():
 
 
 def add_to_kb(q):
-    if 'and' in q:
-        object_1, object_2 = q.split(' and ')
-        expr = read_expr(f'Enemies({object_1.capitalize()}, {object_2.capitalize()})')
-    else:
-        object, subject = q.split(' is ')
-        expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
+    object, subject = q.split(' is ')
+    expr = read_expr(f'{subject.capitalize()}({object.capitalize()})')
 
     if expr in kb:
         print(Fore.LIGHTMAGENTA_EX + 'I already knew that!')
