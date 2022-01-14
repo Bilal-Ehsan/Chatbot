@@ -27,9 +27,9 @@ def speak(text):
 
 def show_prompts():
     print(Fore.LIGHTCYAN_EX + '\nTry asking...\n')
-    print('Show me the stats of [superhero]')
-    print('Show me a picture of [superhero]')
-    print('Show me a picture of a random superhero')
+    print('Show me the stats of [character]')
+    print('Show me a picture of [character]')
+    print('Show me a picture of a random character')
     print('Character threat calculator\n')
 
 
