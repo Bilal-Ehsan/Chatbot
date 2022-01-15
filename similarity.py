@@ -54,7 +54,7 @@ def similarity_check(query):
         if closest < 0.6:
             raise Exception('Closest value too low')
 
-        print(Fore.LIGHTMAGENTA_EX + data[closest_line_num][1])  # Answer
+        print(f'{Fore.LIGHTMAGENTA_EX}{data[closest_line_num][1]}\n')  # Answer
         bot.speak(data[closest_line_num][1])
     except Exception:
-        print(Fore.LIGHTRED_EX + 'I did not get that, please try again.')
+        print(Fore.LIGHTRED_EX + 'I did not get that, please try again.\n')

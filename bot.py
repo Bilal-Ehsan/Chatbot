@@ -37,13 +37,13 @@ def main():
     kern.bootstrap(learnFiles='patterns.xml')
 
     print(Fore.LIGHTGREEN_EX + 'Welcome to the chatbot! I like to talk about superheroes')
-    print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter \'prompts\'!')
+    print(Fore.LIGHTGREEN_EX + 'For a cool list of prompts, enter \'prompts\'!\n')
 
     while True:
         try:
             user_input = input('> ')
         except (KeyboardInterrupt, EOFError):
-            print(Fore.LIGHTRED_EX + 'Uh oh... Something unexpected happened. Bye!')
+            print(Fore.LIGHTRED_EX + 'Uh oh... Something unexpected happened. Bye!\n')
             break
 
         # Pre-process user input and determine response agent (if needed)
@@ -81,7 +81,7 @@ def main():
             elif cmd == 0:
                 similarity.similarity_check(params[1].strip())
         else:
-            print(Fore.LIGHTMAGENTA_EX + answer)
+            print(f'{Fore.LIGHTMAGENTA_EX}{answer}\n')
             speak(answer)
 
 

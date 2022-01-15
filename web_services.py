@@ -14,7 +14,7 @@ def wikipedia_search(params):
         summary = wikipedia.summary(params[1], sentences=3, auto_suggest=False)
         print(summary)
     except:
-        print(Fore.LIGHTRED_EX + 'Sorry, I do not know that. Be more specific!')
+        print(Fore.LIGHTRED_EX + 'Sorry, I do not know that. Be more specific!\n')
 
 
 def get_weather(params):
@@ -33,10 +33,10 @@ def get_weather(params):
             wsp = response_json['wind']['speed']
             conditions = response_json['weather'][0]['description']
             print(f'The temperature is {t} °C, varying between {tmi} and {tma} at the' \
-                f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}')
+                f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}\n')
             succeeded = True
     if not succeeded:
-        print(Fore.LIGHTRED_EX + 'Sorry, I could not resolve the location you gave me.')
+        print(Fore.LIGHTRED_EX + 'Sorry, I could not resolve the location you gave me.\n')
 
 
 def show_stats(superhero):
@@ -59,7 +59,7 @@ def show_stats(superhero):
                 print(f'{x.capitalize()} - {y}')
             print()
     except:
-        print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find the stats of {superhero}!')
+        print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find the stats of {superhero}!\n')
 
 
 def show_image(superhero):
@@ -80,4 +80,4 @@ def show_image(superhero):
                 image = response_json['results'][0]['image'].get('url')
             webbrowser.open(image)
     except:
-        print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find a picture of {superhero}!')
+        print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find a picture of {superhero}!\n')
