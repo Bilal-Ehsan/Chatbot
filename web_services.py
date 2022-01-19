@@ -33,7 +33,7 @@ def get_weather(params):
             wsp = response_json['wind']['speed']
             conditions = response_json['weather'][0]['description']
             print(f'The temperature is {t} °C, varying between {tmi} and {tma} at the' \
-                f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}\n')
+                  f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}\n')
             succeeded = True
     if not succeeded:
         print(Fore.LIGHTRED_EX + 'Sorry, I could not resolve the location you gave me.\n')
