@@ -11,13 +11,12 @@ import wikipedia
 def wikipedia_search(params):
     try:
         summary = wikipedia.summary(params[1], sentences=3, auto_suggest=False)
-        print(summary)
+        print(f'{summary}\n')
     except:
         print(Fore.LIGHTRED_EX + 'Sorry, I do not know that. Be more specific!\n')
 
 
 def get_weather(params):
-    succeeded = False
     api_url = r'http://api.openweathermap.org/data/2.5/weather?q='
     response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+
                             os.getenv("WEATHER_API_KEY")))
@@ -33,31 +32,29 @@ def get_weather(params):
             conditions = response_json['weather'][0]['description']
             print(f'The temperature is {t} °C, varying between {tmi} and {tma} at the' \
                   f' moment, humidity is {hum} %, wind speed {wsp} m/s, {conditions}\n')
-            succeeded = True
-    if not succeeded:
+    else:
         print(Fore.LIGHTRED_EX + 'Sorry, I could not resolve the location you gave me.\n')
 
 
 def show_stats(superhero):
-    try:
-        response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
-        if response.status_code == 200:
-            response_json = json.loads(response.content)
-            power_stats = response_json['results'][0]['powerstats']
-            biography = response_json['results'][0]['appearance']
-            work = response_json['results'][0]['work']
-            print(f'\n{Fore.LIGHTCYAN_EX}{superhero} related info:\n')
+    response = requests.get(f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}')
+    if response.status_code == 200:
+        response_json = json.loads(response.content)
+        power_stats = response_json['results'][0]['powerstats']
+        biography = response_json['results'][0]['appearance']
+        work = response_json['results'][0]['work']
+        print(f'\n{Fore.LIGHTCYAN_EX}{superhero} related info:\n')
 
-            for x, y in power_stats.items():
-                print(f'{x.capitalize()} - {y}')
-            print()
-            for x, y in biography.items():
-                print(f'{x.capitalize()} - {y}')
-            print()
-            for x, y in work.items():
-                print(f'{x.capitalize()} - {y}')
-            print()
-    except:
+        for x, y in power_stats.items():
+            print(f'{x.capitalize()} - {y}')
+        print()
+        for x, y in biography.items():
+            print(f'{x.capitalize()} - {y}')
+        print()
+        for x, y in work.items():
+            print(f'{x.capitalize()} - {y}')
+        print()
+    else:
         print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find the stats of {superhero}!\n')
 
 
@@ -68,15 +65,15 @@ def show_image(superhero):
     else:
         link = f'https://superheroapi.com/api/{os.getenv("SUPERHERO_API_KEY")}/search/{superhero}'
 
-    try:
-        response = requests.get(link)
-        if response.status_code == 200:
-            response_json = json.loads(response.content)
 
-            if superhero == 'random':
-                image = response_json.get('url')
-            else:
-                image = response_json['results'][0]['image'].get('url')
-            webbrowser.open(image)
-    except:
+    response = requests.get(link)
+    if response.status_code == 200:
+        response_json = json.loads(response.content)
+
+        if superhero == 'random':
+            image = response_json.get('url')
+        else:
+            image = response_json['results'][0]['image'].get('url')
+        webbrowser.open(image)
+    else:
         print(f'{Fore.LIGHTRED_EX}Sorry, I couldn\'t find a picture of {superhero}!\n')
