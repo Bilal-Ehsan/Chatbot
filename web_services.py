@@ -4,9 +4,8 @@ import requests
 import random
 import webbrowser
 
-import wikipedia
-
 from colorama import Fore
+import wikipedia
 
 
 def wikipedia_search(params):
