@@ -57,7 +57,7 @@ def main():
             cmd = int(params[0])
 
             if cmd == 1:
-                print(Fore.LIGHTMAGENTA_EX + params[1])
+                print(f'{Fore.LIGHTMAGENTA_EX}{params[1]}\n')
                 speak(params[1])
                 break
             elif cmd == 2:
