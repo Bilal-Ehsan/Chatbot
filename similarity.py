@@ -28,7 +28,7 @@ def similarity_check(query):
 
         # Tokenise each word in each sentence
         tokenised_words = [[w.lower() for w in word_tokenize(word)] 
-                    for word in tokenised_sentences]
+            for word in tokenised_sentences]
         dictionary = gensim.corpora.Dictionary(tokenised_words)  # Maps every word to a number
         corpus = [dictionary.doc2bow(gen_doc) for gen_doc in tokenised_words]  # Bag of words
 
