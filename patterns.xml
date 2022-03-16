@@ -249,6 +249,12 @@
   <template>#10$ <star index="1"/> and <star index="2"/></template>
 </category>
 
+<!-- Image classification -->
+<category>
+  <pattern>WHAT IS MY IMAGE</pattern>
+  <template>#11$</template>
+</category>
+
 <!-- General -->
 
 <category>

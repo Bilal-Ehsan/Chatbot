@@ -6,6 +6,7 @@ import pyttsx3
 
 import fuzzy
 import logic
+import predict_image
 import similarity
 import web_services
 
@@ -78,6 +79,8 @@ def main():
                 logic.add_to_kb(params[1].strip())
             elif cmd == 10:
                 logic.check_kb(params[1].strip())
+            elif cmd == 11:
+                predict_image.image_browser()
             elif cmd == 0:
                 similarity.similarity_check(params[1].strip())
         else:
