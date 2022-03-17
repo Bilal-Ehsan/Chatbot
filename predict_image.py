@@ -37,9 +37,14 @@ def image_browser():
     win = Tk()
     win.geometry('700x350')
 
-    label = Label(win, text='Click on the button below to browse for your image!', font=('Arial', 13))
-    label.pack(pady=75)
+    label = Label(
+        win,
+        text='Click on the button below to browse for your image! (Close me when complete)',
+        font=('Arial', 13), 
+        wraplength=500
+    )
 
+    label.pack(pady=75)
     ttk.Button(win, text='Browse', command=predict_image, cursor='hand2').pack()
 
     win.mainloop()
