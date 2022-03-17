@@ -72,8 +72,10 @@ def main():
                 web_services.show_stats(params[1].strip())
             elif cmd == 6:
                 web_services.show_image(params[1].strip())
+                print()
             elif cmd == 7:
                 web_services.show_image('random')
+                print()
             elif cmd == 8:
                 fuzzy.character_threat_calculator()
             elif cmd == 9:
