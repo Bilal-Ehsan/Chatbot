@@ -30,7 +30,8 @@ def show_prompts():
     print('Show me the stats of [character]')
     print('Show me a picture of [character]')
     print('Show me a picture of a random character')
-    print('Character threat calculator\n')
+    print('Character threat calculator')
+    print('What is my image\n')
 
 
 def main():
@@ -80,6 +81,7 @@ def main():
             elif cmd == 10:
                 logic.check_kb(params[1].strip())
             elif cmd == 11:
+                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
                 predict_image.image_browser()
             elif cmd == 0:
                 similarity.similarity_check(params[1].strip())

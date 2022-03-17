@@ -1,18 +1,21 @@
+import os
+
+from colorama import Fore
 from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
 from tkinter import *
 from tkinter import ttk, filedialog
 
-import os
+import bot
 
 
 model = load_model('model.h5')
-clear = lambda: os.system('cls')
 
 
 def predict_image():
     file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .png')])
+
     if file:
         file_path = os.path.abspath(file.name)
         
@@ -21,12 +24,13 @@ def predict_image():
         test_image = np.expand_dims(test_image, axis=0)
 
         prediction = model.predict(test_image)
-        clear()
         
         if prediction[0][0] > prediction[0][1]:
-            print('That\'s an image of Batman!\n')
+            print(Fore.LIGHTMAGENTA_EX + 'That\'s an image of Batman!\n')
+            bot.speak('That\'s an image of Batman!')
         else:
-            print('That\'s an image of Superman!\n')
+            print(Fore.LIGHTMAGENTA_EX + 'That\'s an image of Superman!\n')
+            bot.speak('That\'s an image of Superman!')
 
 
 def image_browser():
