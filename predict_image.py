@@ -14,7 +14,7 @@ model = load_model('model.h5')
 
 
 def predict_image():
-    file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .png')])
+    file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
 
     if file:
         file_path = os.path.abspath(file.name)
@@ -40,7 +40,7 @@ def image_browser():
     label = Label(
         win,
         text='Click on the button below to browse for your image! (Close me when complete)',
-        font=('Arial', 13), 
+        font=('Arial', 12), 
         wraplength=500
     )
 
