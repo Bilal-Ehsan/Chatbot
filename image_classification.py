@@ -5,7 +5,7 @@ from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
 from tkinter import *
-from tkinter import ttk, filedialog
+from tkinter import filedialog
 
 import bot
 
@@ -31,20 +31,3 @@ def classify_image():
         else:
             print(Fore.LIGHTMAGENTA_EX + 'That\'s an image of Superman!\n')
             bot.speak('That\'s an image of Superman!')
-
-
-def image_browser():
-    win = Tk()
-    win.geometry('700x350')
-
-    label = Label(
-        win,
-        text='Click on the button below to browse for your image! (Close me when complete)',
-        font=('Arial', 12), 
-        wraplength=500
-    )
-
-    label.pack(pady=75)
-    ttk.Button(win, text='Browse', command=classify_image, cursor='hand2').pack()
-
-    win.mainloop()

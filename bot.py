@@ -7,8 +7,8 @@ import pyttsx3
 import azure_services
 import fuzzy
 import logic
-import image_classification
 import similarity
+from util.file_explorer import image_browser
 import web_services
 
 
@@ -86,7 +86,7 @@ def main():
                 logic.check_kb(params[1].strip())
             elif cmd == 11:
                 print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
-                image_classification.image_browser()
+                image_browser('classify_image')
             elif cmd == 12:
                 azure_services.custom_vision()
             elif cmd == 0:

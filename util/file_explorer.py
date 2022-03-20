@@ -1,0 +1,23 @@
+from tkinter import *
+from tkinter import ttk
+
+from image_classification import classify_image
+
+
+def image_browser(func):
+    win = Tk()
+    win.geometry('700x350')
+
+    label = Label(
+        win,
+        text='Click on the button below to browse for your image! (Close me when complete)',
+        font=('Arial', 12), 
+        wraplength=500
+    )
+
+    label.pack(pady=75)
+
+    if func == 'classify_image':
+        ttk.Button(win, text='Browse', command=classify_image, cursor='hand2').pack()
+
+    win.mainloop()
