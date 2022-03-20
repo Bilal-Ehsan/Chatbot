@@ -3,6 +3,7 @@ import os
 from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
 from colorama import Fore
 from msrest.authentication import ApiKeyCredentials
+from tkinter import filedialog
 
 import bot
 
@@ -14,14 +15,15 @@ model_name = 'weapons'
 
 
 def custom_vision():
-    image_path = os.path.join('temp', 'gauntlet_1.jpg')
+    file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
+    file_path = os.path.abspath(file.name)
 
     # Create an instance of the prediction service
     credentials = ApiKeyCredentials(in_headers={'Prediction-key': os.getenv("CV_KEY")})
     custom_vision_client = CustomVisionPredictionClient(endpoint=cv_endpoint, credentials=credentials)
 
     # Open the image, and use the custom vision model to classify it
-    image_contents = open(image_path, 'rb')
+    image_contents = open(file_path, 'rb')
     classification = custom_vision_client.classify_image(project_id, model_name, image_contents.read())
 
     # The results include a prediction for each tag, in descending order of probability - get the first one

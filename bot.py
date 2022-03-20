@@ -4,7 +4,6 @@ from colorama import Fore
 from dotenv import load_dotenv
 import pyttsx3
 
-import azure_services
 import fuzzy
 import logic
 import similarity
@@ -88,7 +87,8 @@ def main():
                 print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
                 image_browser('classify_image')
             elif cmd == 12:
-                azure_services.custom_vision()
+                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
+                image_browser('custom_vision')
             elif cmd == 0:
                 similarity.similarity_check(params[1].strip())
         else:
