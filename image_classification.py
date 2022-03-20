@@ -13,7 +13,7 @@ import bot
 model = load_model('model.h5')
 
 
-def predict_image():
+def classify_image():
     file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
 
     if file:
@@ -45,6 +45,6 @@ def image_browser():
     )
 
     label.pack(pady=75)
-    ttk.Button(win, text='Browse', command=predict_image, cursor='hand2').pack()
+    ttk.Button(win, text='Browse', command=classify_image, cursor='hand2').pack()
 
     win.mainloop()

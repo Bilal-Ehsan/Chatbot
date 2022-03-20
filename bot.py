@@ -4,9 +4,10 @@ from colorama import Fore
 from dotenv import load_dotenv
 import pyttsx3
 
+import azure_services
 import fuzzy
 import logic
-import predict_image
+import image_classification
 import similarity
 import web_services
 
@@ -31,7 +32,8 @@ def show_prompts():
     print('Show me a picture of [character]')
     print('Show me a picture of a random character')
     print('Character threat calculator')
-    print('What is my image\n')
+    print('Classify image locally')
+    print('Classify weapon using the cloud\n')
 
 
 def main():
@@ -84,7 +86,9 @@ def main():
                 logic.check_kb(params[1].strip())
             elif cmd == 11:
                 print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
-                predict_image.image_browser()
+                image_classification.image_browser()
+            elif cmd == 12:
+                azure_services.custom_vision()
             elif cmd == 0:
                 similarity.similarity_check(params[1].strip())
         else:

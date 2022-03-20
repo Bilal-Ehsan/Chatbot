@@ -250,9 +250,15 @@
 </category>
 
 <!-- Image classification -->
+
 <category>
-  <pattern>WHAT IS MY IMAGE</pattern>
+  <pattern>CLASSIFY IMAGE LOCALLY</pattern>
   <template>#11$</template>
+</category>
+
+<category>
+  <pattern>CLASSIFY WEAPON USING THE CLOUD</pattern>
+  <template>#12$</template>
 </category>
 
 <!-- General -->
