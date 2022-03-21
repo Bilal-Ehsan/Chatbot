@@ -14,9 +14,9 @@ model = load_model('model.h5')
 
 def classify_image():
     file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
-    file_path = os.path.abspath(file.name)
+    image_path = os.path.abspath(file.name)
         
-    test_image = image.load_img(file_path, target_size=(224, 224))
+    test_image = image.load_img(image_path, target_size=(224, 224))
     test_image = image.img_to_array(test_image)
     test_image = np.expand_dims(test_image, axis=0)
 

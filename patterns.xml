@@ -261,6 +261,11 @@
   <template>#12$</template>
 </category>
 
+<category>
+  <pattern>ANALYSE IMAGE USING THE CLOUD</pattern>
+  <template>#13$</template>
+</category>
+
 <!-- General -->
 
 <category>
