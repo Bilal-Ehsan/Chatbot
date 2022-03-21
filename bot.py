@@ -88,16 +88,16 @@ def main():
             elif cmd == 10:
                 logic.check_kb(params[1].strip())
             elif cmd == 11:
-                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
+                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image(s)...\n')
                 image_browser('classify_image')
             elif cmd == 12:
-                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
+                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image(s)...\n')
                 image_browser('custom_vision')
             elif cmd == 13:
-                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
+                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image(s)...\n')
                 image_browser('image_analysis')
             elif cmd == 14:
-                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your images...\n')
+                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image(s)...\n')
                 image_browser('face_analysis')
             elif cmd == 0:
                 similarity.similarity_check(params[1].strip())
