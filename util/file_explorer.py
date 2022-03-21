@@ -11,7 +11,7 @@ def image_browser(func):
 
     label = Label(
         win,
-        text='Click on the button below to browse for your image! (Close me when complete)',
+        text='Click on the button below to browse for your image(s)! (Close me when complete)',
         font=('Arial', 12), 
         wraplength=500
     )
