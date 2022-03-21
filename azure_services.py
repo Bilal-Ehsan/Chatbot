@@ -51,7 +51,7 @@ def image_analysis():
     file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
     image_path = os.path.abspath(file.name)
 
-    # Specify the features we want to analyze
+    # Specify the features we want to analyse
     features = ['description', 'tags', 'adult', 'objects', 'faces']
 
     # Get a client for the computer vision service
