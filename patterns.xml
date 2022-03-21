@@ -249,7 +249,7 @@
   <template>#10$ <star index="1"/> and <star index="2"/></template>
 </category>
 
-<!-- Image classification -->
+<!-- Image classification and cognitive services -->
 
 <category>
   <pattern>CLASSIFY IMAGE LOCALLY</pattern>
@@ -264,6 +264,11 @@
 <category>
   <pattern>ANALYSE IMAGE USING THE CLOUD</pattern>
   <template>#13$</template>
+</category>
+
+<category>
+  <pattern>COMPARE TWO IMAGES USING THE CLOUD</pattern>
+  <template>#14$</template>
 </category>
 
 <!-- General -->

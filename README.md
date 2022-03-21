@@ -10,4 +10,4 @@ Add logical reasoning
 Train and add a local image classification model and evaluate it
 
 ## Task D:
-Add a cloud-based image classification service
+Add a cloud-based image classification service, as well as additional cognitive services

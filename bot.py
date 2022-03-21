@@ -32,8 +32,11 @@ def show_prompts():
     print('Show me a picture of a random character')
     print('Character threat calculator')
     print('Classify image locally')
+
+    print(Fore.LIGHTCYAN_EX + '\nTry out some cool cloud services!\n')
     print('Classify weapon using the cloud')
-    print('Analyse image using the cloud\n')
+    print('Analyse image using the cloud')
+    print('Compare two images using the cloud\n')
 
 
 def main():
@@ -93,6 +96,9 @@ def main():
             elif cmd == 13:
                 print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your image...\n')
                 image_browser('image_analysis')
+            elif cmd == 14:
+                print(Fore.LIGHTCYAN_EX + 'Please open the new window to select your images...\n')
+                image_browser('face_analysis')
             elif cmd == 0:
                 similarity.similarity_check(params[1].strip())
         else:
