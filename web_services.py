@@ -18,7 +18,7 @@ def wikipedia_search(params):
 
 def get_weather(params):
     api_url = r'http://api.openweathermap.org/data/2.5/weather?q='
-    response = requests.get(api_url + params[1] + (r'&units=metric&APPID='+
+    response = requests.get(api_url + params[1] + (r'&units=metric&APPID=' +
                             os.getenv("WEATHER_API_KEY")))
 
     if response.status_code == 200:

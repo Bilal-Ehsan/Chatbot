@@ -1,7 +1,6 @@
 def show_image_analysis(image_path, analysis):
     import matplotlib.pyplot as plt
     from PIL import Image, ImageDraw
-    # import numpy as np
 
     # Display the image
     fig = plt.figure(figsize=(12, 8))
