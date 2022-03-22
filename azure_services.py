@@ -10,6 +10,7 @@ from tkinter import filedialog
 
 from azure.faces import show_similar_faces
 from azure.vision import show_image_analysis
+
 import bot
 
 
