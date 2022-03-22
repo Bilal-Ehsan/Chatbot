@@ -21,9 +21,14 @@ cog_endpoint = 'https://image-analysis-bilal.cognitiveservices.azure.com/'
 model_name = 'weapons'
 
 
-def custom_vision():
+def get_path():
     file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
-    image_path = os.path.abspath(file.name)
+    path = os.path.abspath(file.name)
+    return path
+
+
+def custom_vision():
+    image_path = get_path()
 
     # Create an instance of the prediction service
     credentials = ApiKeyCredentials(in_headers={'Prediction-key': os.getenv("CV_KEY")})
@@ -48,8 +53,7 @@ def custom_vision():
 
 
 def image_analysis():
-    file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
-    image_path = os.path.abspath(file.name)
+    image_path = get_path()
 
     # Specify the features we want to analyse
     features = ['description', 'tags', 'adult', 'objects', 'faces']
@@ -69,15 +73,13 @@ def face_analysis():
     face_client = FaceClient(cog_endpoint, CognitiveServicesCredentials(os.getenv("COG_KEY")))
 
     # Get the ID of the first face in image 1
-    file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
-    image_one_path = os.path.abspath(file.name)
+    image_one_path = get_path()
     image_one_stream = open(image_one_path, 'rb')
     image_one_faces = face_client.face.detect_with_stream(image=image_one_stream)
     face_one = image_one_faces[0]
 
     # Get the face IDs in a second image
-    file = filedialog.askopenfile(mode='r', filetypes=[('image files', '.jpg .jpeg .png')])
-    image_two_path = os.path.abspath(file.name)
+    image_two_path = get_path()
     image_two_stream = open(image_two_path, 'rb')
     image_two_faces = face_client.face.detect_with_stream(image=image_two_stream)
     image_two_face_ids = list(map(lambda face: face.face_id, image_two_faces))
