@@ -1,4 +1,5 @@
 import os
+from tkinter import filedialog
 
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
@@ -6,11 +7,9 @@ from azure.cognitiveservices.vision.face import FaceClient
 from colorama import Fore
 from msrest.authentication import ApiKeyCredentials
 from msrest.authentication import CognitiveServicesCredentials
-from tkinter import filedialog
 
 from azure.faces import show_similar_faces
 from azure.vision import show_image_analysis
-
 import bot
 
 
